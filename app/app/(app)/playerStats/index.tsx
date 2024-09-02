@@ -1,4 +1,4 @@
-import {Heading, Text, View} from '@/components/Themed';
+import {Heading, Text, TEXT_SIZE_4_EXTRA_LARGE, TEXT_SIZE_6_EXTRA_LARGE, View} from '@/components/Themed';
 import React from "react";
 import {GridList} from "@/components/GridList";
 import {Player, useCurrentPlayers} from "@/states/SynchedProfile";
@@ -33,8 +33,8 @@ export default function TabOneScreen() {
             borderWidth: "2px",
             borderColor: projectColor,
         }}>
-            <Heading>{player.name}</Heading>
-            <Heading>{score}</Heading>
+            <Text size={TEXT_SIZE_4_EXTRA_LARGE}>{player.name}</Text>
+            <Text size={TEXT_SIZE_4_EXTRA_LARGE}>{score}</Text>
         </View>
     }
 
@@ -68,21 +68,21 @@ export default function TabOneScreen() {
             }}>
                 <View style={{width: "100%", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
                         <AnimationKing />
+                </View>
+                <View style={{
+                    width: "100%",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}>
+                    <View>
+                        <MyButton paddingHorizontal={50} isActive={true} accessibilityLabel={"zur Startseite"} useOnlyNecessarySpace={true} text={"zur Startseite"} leftIcon={"home"} onPress={() => {
+                            navigateToHome();
+                        }} />
+                    </View>
                     <View style={{alignItems: "center", justifyContent: "center"}}>
                         <Heading bold={true}>{"Punkte"}</Heading>
                     </View>
                 </View>
-                    <View style={{
-                        width: "100%",
-                        alignItems: "center",
-                        justifyContent: "center",
-                    }}>
-                        <View>
-                            <MyButton accessibilityLabel={"zur Startseite"} useOnlyNecessarySpace={true} text={"zur Startseite"} leftIcon={"home"} onPress={() => {
-                                navigateToHome();
-                            }} />
-                        </View>
-                    </View>
                 <View style={{width: "100%", height: "20px"}} />
                 {renderPlayers()}
             </ScrollView>

@@ -65,6 +65,8 @@ export default function TabOneScreen() {
             <View style={{
                 backgroundColor: projectColor,
                 borderRadius: BUTTON_DEFAULT_BorderRadius,
+                borderColor: projectColorContrast,
+                borderWidth: 1,
                 padding: BUTTON_DEFAULT_Padding
             }}>
                 <View>
@@ -129,7 +131,7 @@ export default function TabOneScreen() {
 
                 return (
                     <View style={continueStyle}>
-                        <MyButton leftIcon={"play"} textSize={TEXT_SIZE_4_EXTRA_LARGE} onPress={() => {
+                        <MyButton isActive={true} paddingHorizontal={50} textSize={TEXT_SIZE_4_EXTRA_LARGE} onPress={() => {
                             setGameMode(GameMode.PLAYERS);
                             setPlayers({...tempPlayers})
                             nacigateToGames();

@@ -8,6 +8,7 @@ import {MyButton} from "@/components/buttons/MyButton";
 import {useIsLargeDevice} from "@/helper/device/DeviceHelper";
 import {navigateToSelectAmountPlayers} from "@/app/(app)/gamemode/selectPlayers";
 import {nacigateToGames} from "@/app/(app)/games";
+import {useCurrentPlayers} from "@/states/SynchedProfile";
 
 export function navigateToGameModeSelection(){
     router.push("/(app)/gamemode");
@@ -23,6 +24,7 @@ export default function TabOneScreen() {
 
     const [gameMode, setGameMode] = useGameMode()
     const [configurePlayers, setConfigurePlayers] = useState(false);
+    const [currentPlayer, setCurrentPlayer, setNextCurrentPlayer, players, setPlayers] = useCurrentPlayers();
 
 
     useEffect(() => {
@@ -34,6 +36,7 @@ export default function TabOneScreen() {
             <GridList paddingVertical={20} paddingHorizontal={20} amountColumns={amountColumns}>
                 <MyButton textSize={TEXT_SIZE_4_EXTRA_LARGE} isActive={true} accessibilityLabel={GAME_MODE_NAME_FLASHCARDS} onPress={() => {
                     setGameMode(GameMode.FLASHCARDS);
+                    setPlayers({});
                     nacigateToGames();
                 } } text={GAME_MODE_NAME_FLASHCARDS}  />
                 <MyButton textSize={TEXT_SIZE_4_EXTRA_LARGE} isActive={true} accessibilityLabel={GAME_MODE_NAME_MULTIPLAYER} onPress={() => {

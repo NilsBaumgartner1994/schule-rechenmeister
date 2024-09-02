@@ -42,6 +42,8 @@ export type MyScreenHeaderPropsOptional = {
 	navigateHome?: boolean,
 	navigateHomeIcon?: string,
 	navigateHomeText?: string,
+	navigateToRoute?: string
+	onPress: () => void
 }
 
 export type MyScreenHeaderProps = MyScreenHeaderPropsRequired & MyScreenHeaderPropsOptional;
@@ -96,10 +98,12 @@ export const MyScreenHeader = ({ navigation, route, options, custom_title, custo
 	const usedTitle = custom_title || default_title
 
 	const navigateHome = props.navigateHome || undefined;
+	const navigateToRoute = props.navigateToRoute || undefined
 	const navigateHomeIcon = props.navigateHomeIcon || undefined
 	const navigateHomeText = props.navigateHomeText || undefined
+	const onPress = props.onPress
 
-	return <MyScreenHeaderCustom navigateHomeText={navigateHomeText} navigateHome={navigateHome} navigateHomeIcon={navigateHomeIcon} title={usedTitle} headerStyle={options.headerStyle} showBackButton={showBackButton} secondaryHeaderContent={secondaryHeaderContent} hideDivider={hideDivider} />
+	return <MyScreenHeaderCustom onPress={onPress} navigateToRoute={navigateToRoute} navigateHomeText={navigateHomeText} navigateHome={navigateHome} navigateHomeIcon={navigateHomeIcon} title={usedTitle} headerStyle={options.headerStyle} showBackButton={showBackButton} secondaryHeaderContent={secondaryHeaderContent} hideDivider={hideDivider} />
 }
 
 
@@ -114,6 +118,8 @@ export type MyScreenHeaderCustomProps = {
 	navigateHome?: boolean,
 	navigateHomeIcon?: string,
 	navigateHomeText?: string,
+	navigateToRoute?: string,
+	onPress: () => void
 }
 /**
  * The main component for rendering a custom drawer header.
@@ -185,9 +191,10 @@ export const MyScreenHeaderCustom = ({ title, headerStyle, showBackButton, secon
 		navigateHome?: boolean;
 		navigateHomeIcon?: string;
 		navigateHomeText?: string;
+		onPress?: () => void
 	}) {
 
-		if(showBackButton || props?.navigateHome){
+		if(showBackButton || props?.navigateHome || props?.onPress){
 			let icon = IconNames.drawer_menu_go_back_icon;
 			if(drawerPosition === DrawerConfigPosition.Right){
 				icon = IconNames.drawer_menu_go_back_rtl_icon;
@@ -200,6 +207,11 @@ export const MyScreenHeaderCustom = ({ title, headerStyle, showBackButton, secon
 			// Returns a touchable component with an icon for toggling the drawer.
 			return (
 				<MyButton useOnlyNecessarySpace={true} text={navigateHomeText} tooltip={translation_navigate_back} accessibilityLabel={translation_navigate_back} useTransparentBorderColor={true} leftIcon={icon} {...props} onPress={() => {
+					if(props?.onPress){
+						props.onPress();
+						return;
+					}
+
 					if(props?.navigateHome){
 						router.push('/(app)/home');
 						return;
@@ -279,6 +291,8 @@ export const MyScreenHeaderCustom = ({ title, headerStyle, showBackButton, secon
 							navigateHome: props.navigateHome,
 							navigateHomeIcon: props.navigateHomeIcon,
 							navigateHomeText: props.navigateHomeText,
+							onPress: props.onPress,
+							navigateToRoute: props.navigateToRoute
 						})}
 					</View>
 					<View style={{
