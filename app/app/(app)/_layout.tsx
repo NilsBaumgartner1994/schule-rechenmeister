@@ -79,8 +79,8 @@ export default function TabLayout() {
           })}
           {useRenderMyDrawerScreen({
               routeName: 'games/additionAndSubtraction/gameWithInput/index',
-              label: "Spiel",
-              title: "Spiel",
+              label: "Beenden",
+              title: "Beenden",
               icon: 'gamepad',
               visibleInDrawer: false,
               showBackButton: false,
@@ -96,8 +96,8 @@ export default function TabLayout() {
           })}
           {useRenderMyDrawerScreen({
               routeName: 'games/little1x1/gameWithInput/index',
-              label: "Spiel",
-              title: "Spiel",
+              label: "Beenden",
+              title: "Beenden",
               icon: 'gamepad',
               visibleInDrawer: false,
               showBackButton: false,

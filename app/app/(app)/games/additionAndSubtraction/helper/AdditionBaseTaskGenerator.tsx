@@ -126,7 +126,7 @@ export class AdditionBaseTaskGenerator {
                     if(
                         !AdditionBaseTaskGenerator.isMultipleOfTen(firstNumber) &&
                         !AdditionBaseTaskGenerator.isMultipleOfTen(secondNumber) &&
-                        firstNumberOne+secondNumberOne >= 10 &&
+                        firstNumberOne+secondNumberOne > 10 &&
                         firstNumber+secondNumber <= maxAsNumber
                     ) {
                         //console.log("OK firstNumberOne: " + firstNumberOne + " secondNumberOne: " + secondNumberOne);
