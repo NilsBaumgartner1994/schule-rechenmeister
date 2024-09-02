@@ -24,14 +24,14 @@ export class DivisionTaskGenerator {
         return taskWithSolution;
     }
 
-    static generateAllTask() {
+    static generateAllTaskWithoutEasyOnes() {
         let taskWithSolution = {
             task: "",
             solution: 0
         }
 
-        let firstNumber = this.generateNumberFromTo(1, 10);
-        let secondNumber = this.generateNumberFromTo(1, 10);
+        let firstNumber = this.generateNumberFromTo(2, 10); // no base with value 1
+        let secondNumber = this.generateNumberFromTo(2, 10); // no division by 1
         let solution = firstNumber * secondNumber;
 
         taskWithSolution.task = solution + " : " + firstNumber;

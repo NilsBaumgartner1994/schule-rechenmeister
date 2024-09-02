@@ -41,14 +41,14 @@ export default function TabOneScreen() {
             if(isCoreTasks){
                 return MultiplicationTaskGenerator.generateCoreTask()
             } else {
-                return MultiplicationTaskGenerator.generateAllTask()
+                return MultiplicationTaskGenerator.generateAllTaskWithoutEasyOnes()
             }
         }
         if(!isMultiplication && isDivision){
             if(isCoreTasks){
                 return DivisionTaskGenerator.generateCoreTask()
             } else {
-                return DivisionTaskGenerator.generateAllTask()
+                return DivisionTaskGenerator.generateAllTaskWithoutEasyOnes()
             }
         }
         if(isMultiplication && isDivision){
@@ -60,8 +60,8 @@ export default function TabOneScreen() {
                 return possibleTasks[Math.floor(Math.random() * possibleTasks.length)];
             } else {
                 let possibleTasks = [
-                    MultiplicationTaskGenerator.generateAllTask(),
-                    DivisionTaskGenerator.generateAllTask()
+                    MultiplicationTaskGenerator.generateAllTaskWithoutEasyOnes(),
+                    DivisionTaskGenerator.generateAllTaskWithoutEasyOnes()
                 ];
                 return possibleTasks[Math.floor(Math.random() * possibleTasks.length)];
             }
