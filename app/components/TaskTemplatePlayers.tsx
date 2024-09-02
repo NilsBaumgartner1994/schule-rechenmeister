@@ -9,6 +9,7 @@ import {AnimationWrong} from "@/components/animations/AnimationWrong";
 import {useGameMode} from "@/states/SynchedGameMode";
 import {navigateToPlayerStats} from "@/app/(app)/playerStats";
 import {ScrollView} from "react-native";
+import {useMyContrastColor} from "@/helper/color/MyContrastColor";
 
 export type TaskWithSolutionType = {
     task: string;
@@ -21,6 +22,10 @@ export type TaskTemplateProps = {
 }
 
 export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props) => {
+
+
+    const COLOR_TASK = "#fff2cc";
+    const textColor = useMyContrastColor(COLOR_TASK);
 
     const ANIMATION_CORRECT = "correct";
     const ANIMATION_WRONG = "wrong";
@@ -67,12 +72,13 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
     }
 
     function renderTask(){
-        const COLOR_TASK = "#fff2cc";
 
         return (
             <View style={{width: "100%", flexDirection: "row", alignItems: "center", backgroundColor: COLOR_TASK, paddingHorizontal: "30px", borderRadius: "20px"}}>
                 <View style={{width: "100%", alignItems: "center", justifyContent: "center", flexDirection: "row"}}>
-                    <Text size={TEXT_SIZE_4_EXTRA_LARGE} bold={true}>{task+" = "}</Text>
+                    <Text style={{
+                        color: textColor
+                    }} size={TEXT_SIZE_4_EXTRA_LARGE} bold={true}>{task+" = "}</Text>
                     <View style={{paddingLeft: 10, width: "20%", paddingVertical: 10}}>
                         <MyButton textSize={TEXT_SIZE_4_EXTRA_LARGE} text={input || " "} />
                     </View>

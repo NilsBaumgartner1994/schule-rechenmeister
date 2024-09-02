@@ -1,14 +1,7 @@
-import React, {FunctionComponent, useEffect, useState} from "react";
-import {Icon, Text, TEXT_SIZE_2_EXTRA_LARGE, TEXT_SIZE_6_EXTRA_LARGE, View} from "@/components/Themed";
-import {MyButton} from "@/components/buttons/MyButton";
-import {GridList} from "@/components/GridList";
-import {useCurrentPlayers} from "@/states/SynchedProfile";
-import {AnimationDonkey} from "@/components/animations/AnimationDonkey";
-import {AnimationCorrect} from "@/components/animations/AnimationCorrect";
-import {AnimationWrong} from "@/components/animations/AnimationWrong";
-import {useGameMode} from "@/states/SynchedGameMode";
+import React, {FunctionComponent, useState} from "react";
+import {Text, TEXT_SIZE_6_EXTRA_LARGE, View} from "@/components/Themed";
 import {TouchableOpacity} from "react-native";
-import {MyTouchableOpacity} from "@/components/buttons/MyTouchableOpacity";
+import {useMyContrastColor} from "@/helper/color/MyContrastColor";
 
 export type TaskWithSolutionType = {
     task: string;
@@ -24,6 +17,7 @@ export const TaskTemplateFlashcard: FunctionComponent<TaskTemplateProps> = (prop
 
     const currentTaskWithSolution = props?.currentTaskWithSolution
     const COLOR_TASK = "#fff2cc";
+    const textColor = useMyContrastColor(COLOR_TASK);
 
     const [showSolution, setShowSolution] = useState(false);
 
@@ -47,7 +41,9 @@ export const TaskTemplateFlashcard: FunctionComponent<TaskTemplateProps> = (prop
                         borderRadius: "20px"
                     }}>
                         <View style={{width: "100%", alignItems: "center", justifyContent: "center", flexDirection: "row"}}>
-                            <Text size={TEXT_SIZE_6_EXTRA_LARGE} bold={true}>{task + " = "}</Text>
+                            <Text style={{
+                                color: textColor
+                            }} size={TEXT_SIZE_6_EXTRA_LARGE} bold={true}>{task + " = "}</Text>
                         </View>
                     </View>
             </View>
@@ -78,7 +74,9 @@ export const TaskTemplateFlashcard: FunctionComponent<TaskTemplateProps> = (prop
                         borderRadius: "20px"
                     }}>
                         <View style={{width: "100%", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
-                            <Text size={TEXT_SIZE_6_EXTRA_LARGE} bold={true}>{text}</Text>
+                            <Text style={{
+                                color: textColor
+                            }} size={TEXT_SIZE_6_EXTRA_LARGE} bold={true}>{text}</Text>
                         </View>
                     </View>
                 </TouchableOpacity>
