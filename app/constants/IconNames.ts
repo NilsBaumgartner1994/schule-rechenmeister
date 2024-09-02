@@ -34,6 +34,7 @@ export class IconNames {
     static settings_user_account_icon = 'badge-account-horizontal'
     static user_account_delete_icon = 'account-remove'
     static logout_icon = 'logout'
+    static close_icon = 'close'
     static sign_in_icon = 'login'
     static sign_in_with_mail_icon = 'account-tie'
     static debug_icon = 'bug'

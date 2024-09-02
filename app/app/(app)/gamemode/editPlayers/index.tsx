@@ -150,7 +150,7 @@ export default function TabOneScreen() {
                       flexDirection: "row",
                       width: "100%",
                   }}>
-                      <Heading>{"Namen bearbeiten"}</Heading>
+                      <Heading>{"Namen"}</Heading>
                   </View>
                   <GridList amountColumns={amountColumns} paddingVertical={20} paddingHorizontal={20}>
                       {renderEditPlayers()}

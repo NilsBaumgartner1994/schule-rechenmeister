@@ -17,7 +17,7 @@ export default function TabOneScreen() {
     }}>
         <View style={{width: "100%"}}>
             <View style={{width: "100%", alignItems: "center"}}>
-                <Heading>{"Wer wird Kopfrechenmeister?"}</Heading>
+                <Heading>{"Wer wird Rechenmeister?"}</Heading>
             </View>
             <View style={{width: "100%", height: "20px"}} />
             <View style={{width: "100%", alignItems: "center"}}>
@@ -28,16 +28,11 @@ export default function TabOneScreen() {
             <View style={{width: "100%", height: "20px"}} />
             <View style={{
                 width: "100%",
-                alignItems: "center",
+                alignItems: "center"
             }}>
-                <View style={{
-                    width: "50%",
-                    alignItems: "center",
-                }}>
-                    <MyButton iconSize={getFontSizeInPixelBySize(TEXT_SIZE_4_EXTRA_LARGE)} leftIcon={"play"} useOnlyNecessarySpace={false} textSize={TEXT_SIZE_4_EXTRA_LARGE} text={"Start"} onPress={() => {
-                        navigateToGameModeSelection();
-                    }} />
-                </View>
+                <MyButton paddingHorizontal={200} isActive={true} iconSize={getFontSizeInPixelBySize(TEXT_SIZE_4_EXTRA_LARGE)} textSize={TEXT_SIZE_4_EXTRA_LARGE} text={"Start"} onPress={() => {
+                    navigateToGameModeSelection();
+                }} />
             </View>
         </View>
     </View>

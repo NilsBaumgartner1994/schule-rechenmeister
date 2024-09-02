@@ -145,6 +145,7 @@ export const MyButtonCustom = ({centerItems, customIcon, icon, isActive, borderB
 		renderedText = (
 			<MyButtonCustomContentPadder>
 				<Text
+					bold={props.textBold}
 					size={props.textSize}
 					style={{
 					flexShrink: 1,
@@ -241,6 +242,7 @@ export const MyButtonCustom = ({centerItems, customIcon, icon, isActive, borderB
 				style={
 					[disabledStyle, pressedStyle, {
 						borderColor: usedBorderColor,
+						paddingHorizontal: props.paddingHorizontal ?? BUTTON_DEFAULT_Padding,
 						borderWidth: 1,
 						backgroundColor: usedViewBackgroundColor,
 						justifyContent: 'flex-start',

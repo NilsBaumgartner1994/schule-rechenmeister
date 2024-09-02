@@ -2,7 +2,7 @@ import {getMyScreenHeaderFunction, MyScreenHeader, MyScreenHeaderProps} from "@/
 import {IconNames} from "@/constants/IconNames";
 
 const MyCustomHeaderNavigateHome = ({ ...props }: MyScreenHeaderProps) => {
-	return <MyScreenHeader {...props} navigateHome={true} navigateHomeIcon={IconNames.logout_icon} />
+	return <MyScreenHeader {...props} navigateHome={true} navigateHomeIcon={IconNames.close_icon} navigateHomeText={"Beenden"}  />
 }
 
 export const getMyCustomHeaderNavigateHome: getMyScreenHeaderFunction = () => {

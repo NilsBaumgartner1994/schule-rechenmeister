@@ -64,7 +64,7 @@ export default function TabOneScreen() {
                 flexDirection: "row",
                 width: "100%",
             }}>
-                <Heading>{"Wähle die Kategorie"}</Heading>
+                <Heading>{"Wähle dein Spiel"}</Heading>
             </View>
            <MyGridFlatList data={data} renderItem={renderItem} amountColumns={amountColumns} />
         </View>

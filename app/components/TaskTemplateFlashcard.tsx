@@ -1,7 +1,14 @@
 import React, {FunctionComponent, useState} from "react";
-import {Text, TEXT_SIZE_2_EXTRA_LARGE, TEXT_SIZE_6_EXTRA_LARGE, View} from "@/components/Themed";
+import {
+    Text,
+    TEXT_SIZE_2_EXTRA_LARGE,
+    TEXT_SIZE_6_EXTRA_LARGE,
+    useViewBackgroundColor,
+    View
+} from "@/components/Themed";
 import {TouchableOpacity} from "react-native";
 import {useMyContrastColor} from "@/helper/color/MyContrastColor";
+import {useProjectColor} from "@/states/ProjectInfo";
 
 export type TaskWithSolutionType = {
     task: string;
@@ -16,8 +23,11 @@ export type TaskTemplateProps = {
 export const TaskTemplateFlashcard: FunctionComponent<TaskTemplateProps> = (props) => {
 
     const currentTaskWithSolution = props?.currentTaskWithSolution
-    const COLOR_TASK = "#fff2cc";
-    const textColor = useMyContrastColor(COLOR_TASK);
+    const projectColor = useProjectColor();
+    const projectColorContrast = useMyContrastColor(projectColor);
+
+    const viewBackgrundColor = projectColor
+    const viewBackgroundColorContrast = useMyContrastColor(viewBackgrundColor)
 
     const [showSolution, setShowSolution] = useState(false);
 
@@ -36,13 +46,13 @@ export const TaskTemplateFlashcard: FunctionComponent<TaskTemplateProps> = (prop
                         width: "100%",
                         flexDirection: "row",
                         alignItems: "center",
-                        backgroundColor: COLOR_TASK,
+                        backgroundColor: projectColor,
                         paddingHorizontal: "30px",
                         borderRadius: "20px"
                     }}>
                         <View style={{width: "100%", alignItems: "center", justifyContent: "center", flexDirection: "row"}}>
                             <Text style={{
-                                color: textColor
+                                color: projectColorContrast
                             }} size={TEXT_SIZE_6_EXTRA_LARGE} bold={true}>{task + " = "}</Text>
                         </View>
                     </View>
@@ -70,18 +80,18 @@ export const TaskTemplateFlashcard: FunctionComponent<TaskTemplateProps> = (prop
                         width: "100%",
                         flexDirection: "row",
                         alignItems: "center",
-                        backgroundColor: COLOR_TASK,
+                        backgroundColor: viewBackgrundColor,
                         paddingHorizontal: "30px",
                         borderWidth: "2px",
-                        borderColor: textColor,
+                        borderColor: viewBackgroundColorContrast,
                         borderRadius: "20px"
                     }}>
                         <View style={{width: "100%", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
                             <Text style={{
-                                color: textColor
+                                color: viewBackgroundColorContrast
                             }} size={TEXT_SIZE_6_EXTRA_LARGE} bold={true}>{text}</Text>
                             <Text style={{
-                                color: textColor
+                                color: viewBackgroundColorContrast
                             }} size={TEXT_SIZE_2_EXTRA_LARGE} bold={true}>{textOnPress}</Text>
                         </View>
                     </View>

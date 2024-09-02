@@ -13,6 +13,7 @@ export type MyNewButtonProps = {
     accessibilityLabel: string,
     accessibilityRole?: MyAccessibilityRoles,
     text?: string,
+	textBold?: boolean,
 	textSize?: string,
 	renderedText?: any,
     leftIcon?: string,
@@ -31,6 +32,7 @@ export type MyNewButtonProps = {
     borderRightRadius?: number,
     borderTopRadius?: number,
     borderBottomRadius?: number,
+	paddingHorizontal?: number,
     icon?: string | null,
 	customIcon?: any
     centerItems?: boolean
@@ -56,8 +58,8 @@ export const MyButton = (props: MyNewButtonProps) => {
 	const inactiveHoveredBackgroundColor = useLighterOrDarkerColorForSelection(inactiveBackgroundColor)
 	const inactiveHoveredTextColor = useMyContrastColor(inactiveHoveredBackgroundColor)
 
-	let activeBorderColor = activeBackgroundColor
-	let inactiveBorderColor = activeBackgroundColor
+	let activeBorderColor = useMyContrastColor(activeBackgroundColor)
+	let inactiveBorderColor = useMyContrastColor(inactiveBackgroundColor)
 
 	if (props?.useTransparentBorderColor) {
 		activeBorderColor = 'transparent'

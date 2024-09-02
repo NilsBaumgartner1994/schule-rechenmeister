@@ -53,7 +53,7 @@ export default function TabOneScreen() {
                 flexDirection: "row",
                 width: "100%",
             }}>
-                <Heading>{"Wähle den Spielmodus"}</Heading>
+                <Heading>{"Spielmodus"}</Heading>
             </View>
             {renderSelectGameMode()}
         </MyScrollView>

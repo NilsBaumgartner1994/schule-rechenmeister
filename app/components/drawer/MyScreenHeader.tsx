@@ -41,6 +41,7 @@ export type MyScreenHeaderPropsOptional = {
     hideDivider?: boolean,
 	navigateHome?: boolean,
 	navigateHomeIcon?: string,
+	navigateHomeText?: string,
 }
 
 export type MyScreenHeaderProps = MyScreenHeaderPropsRequired & MyScreenHeaderPropsOptional;
@@ -96,8 +97,9 @@ export const MyScreenHeader = ({ navigation, route, options, custom_title, custo
 
 	const navigateHome = props.navigateHome || undefined;
 	const navigateHomeIcon = props.navigateHomeIcon || undefined
+	const navigateHomeText = props.navigateHomeText || undefined
 
-	return <MyScreenHeaderCustom navigateHome={navigateHome} navigateHomeIcon={navigateHomeIcon} title={usedTitle} headerStyle={options.headerStyle} showBackButton={showBackButton} secondaryHeaderContent={secondaryHeaderContent} hideDivider={hideDivider} />
+	return <MyScreenHeaderCustom navigateHomeText={navigateHomeText} navigateHome={navigateHome} navigateHomeIcon={navigateHomeIcon} title={usedTitle} headerStyle={options.headerStyle} showBackButton={showBackButton} secondaryHeaderContent={secondaryHeaderContent} hideDivider={hideDivider} />
 }
 
 
@@ -111,6 +113,7 @@ export type MyScreenHeaderCustomProps = {
 	hideDivider?: boolean,
 	navigateHome?: boolean,
 	navigateHomeIcon?: string,
+	navigateHomeText?: string,
 }
 /**
  * The main component for rendering a custom drawer header.
@@ -181,6 +184,7 @@ export const MyScreenHeaderCustom = ({ title, headerStyle, showBackButton, secon
 		labelVisible?: boolean;
 		navigateHome?: boolean;
 		navigateHomeIcon?: string;
+		navigateHomeText?: string;
 	}) {
 
 		if(showBackButton || props?.navigateHome){
@@ -191,10 +195,11 @@ export const MyScreenHeaderCustom = ({ title, headerStyle, showBackButton, secon
 			if(props?.navigateHomeIcon){
 				icon = props.navigateHomeIcon;
 			}
+			const navigateHomeText = props?.navigateHomeText || undefined
 
 			// Returns a touchable component with an icon for toggling the drawer.
 			return (
-				<MyButton useOnlyNecessarySpace={true} tooltip={translation_navigate_back} accessibilityLabel={translation_navigate_back} useTransparentBorderColor={true} leftIcon={icon} {...props} onPress={() => {
+				<MyButton useOnlyNecessarySpace={true} text={navigateHomeText} tooltip={translation_navigate_back} accessibilityLabel={translation_navigate_back} useTransparentBorderColor={true} leftIcon={icon} {...props} onPress={() => {
 					if(props?.navigateHome){
 						router.push('/(app)/home');
 						return;
@@ -273,6 +278,7 @@ export const MyScreenHeaderCustom = ({ title, headerStyle, showBackButton, secon
 						{renderDrawerIcon({
 							navigateHome: props.navigateHome,
 							navigateHomeIcon: props.navigateHomeIcon,
+							navigateHomeText: props.navigateHomeText,
 						})}
 					</View>
 					<View style={{

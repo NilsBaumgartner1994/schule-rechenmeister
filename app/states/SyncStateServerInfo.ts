@@ -39,7 +39,7 @@ export function useServerInfo() {
 				project_descriptor: '',
 				default_language: 'de-DE',
 				project_logo: null,
-				project_color: '#27398D',
+				project_color: '#FFF2CC',
 				public_foreground: null,
 				public_background: null,
 				public_note: null,

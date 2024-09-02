@@ -1,5 +1,11 @@
 import React, {FunctionComponent, useEffect, useState} from "react";
-import {getFontSizeInPixelBySize, Text, TEXT_SIZE_4_EXTRA_LARGE, View} from "@/components/Themed";
+import {
+    getFontSizeInPixelBySize,
+    Text, TEXT_SIZE_2_EXTRA_LARGE,
+    TEXT_SIZE_4_EXTRA_LARGE,
+    TEXT_SIZE_6_EXTRA_LARGE,
+    View
+} from "@/components/Themed";
 import {MyButton} from "@/components/buttons/MyButton";
 import {GridList} from "@/components/GridList";
 import {useCurrentPlayers} from "@/states/SynchedProfile";
@@ -8,6 +14,7 @@ import {AnimationCorrect} from "@/components/animations/AnimationCorrect";
 import {AnimationWrong} from "@/components/animations/AnimationWrong";
 import {ScrollView} from "react-native";
 import {useMyContrastColor} from "@/helper/color/MyContrastColor";
+import {useProjectColor} from "@/states/ProjectInfo";
 
 export type TaskWithSolutionType = {
     task: string;
@@ -22,8 +29,13 @@ export type TaskTemplateProps = {
 export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props) => {
 
 
-    const COLOR_TASK = "#fff2cc";
+    const COLOR_TASK = useProjectColor()
     const textColor = useMyContrastColor(COLOR_TASK);
+
+    const COLOR_CORRECT = "#75db70";
+    const COLOR_CORRECT_CONTRAST = useMyContrastColor(COLOR_CORRECT);
+    const COLOR_WRONG = "#db7070";
+    const COLOR_WRONG_CONTRAST = useMyContrastColor(COLOR_WRONG);
 
     const ANIMATION_CORRECT = "correct";
     const ANIMATION_WRONG = "wrong";
@@ -62,7 +74,7 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
                 <View style={{borderRadius: "10px", overflow: "hidden"}}>
                     <View>
                         <View style={{paddingHorizontal: 20}}>
-                            <Text>{currentPlayerName+":"}</Text>
+                            <Text size={TEXT_SIZE_2_EXTRA_LARGE}>{currentPlayerName+":"}</Text>
                         </View>
                     </View>
                 </View>
@@ -76,8 +88,8 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
             <View style={{width: "100%", flexDirection: "row", alignItems: "center", backgroundColor: COLOR_TASK, paddingHorizontal: "30px", borderRadius: "20px"}}>
                 <View style={{width: "100%", alignItems: "center", justifyContent: "center", flexDirection: "row"}}>
                     <Text style={{
-                        color: textColor
-                    }} size={TEXT_SIZE_4_EXTRA_LARGE} bold={true}>{task+" = "}</Text>
+                        color: textColor,
+                    }} size={TEXT_SIZE_6_EXTRA_LARGE} bold={true}>{task+" = "}</Text>
                     <View style={{paddingLeft: 10, width: "20%", paddingVertical: 10}}>
                         <MyButton textSize={TEXT_SIZE_4_EXTRA_LARGE} text={input || " "} />
                     </View>
@@ -160,7 +172,7 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
         let inputFields = [];
         for(let i=0; i<=9; i++){
             inputFields.push(
-                <MyButton textSize={TEXT_SIZE_4_EXTRA_LARGE} text={i+""} onPress={() => {
+                <MyButton textSize={TEXT_SIZE_6_EXTRA_LARGE} text={i+""} onPress={() => {
                     let nextInput = input + "" + i;
                     let asNumber = parseInt(nextInput);
                     setInput(""+asNumber);
@@ -174,7 +186,7 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
 
         return (
             <View style={{width: "100%"}}>
-                <GridList amountColumns={5}>
+                <GridList paddingVertical={3} paddingHorizontal={3} amountColumns={5}>
                     {renderInputFields()}
                 </GridList>
             </View>
@@ -207,10 +219,10 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
         return(
             <View style={{width: "100%"}}>
                 <GridList paddingVertical={10} amountColumns={1}>
-                    <MyButton iconSize={getFontSizeInPixelBySize(TEXT_SIZE_4_EXTRA_LARGE)} textSize={TEXT_SIZE_4_EXTRA_LARGE} icon={"check"} style={{borderColor: "green", borderWidth: 3}} onPress={() => {
+                    <MyButton isActive={true} backgroundColor={COLOR_CORRECT} iconSize={getFontSizeInPixelBySize(TEXT_SIZE_4_EXTRA_LARGE)} textSize={TEXT_SIZE_4_EXTRA_LARGE} icon={"check"} style={{borderColor: "green", borderWidth: 3}} onPress={() => {
                         handleConfirm();
                     }} />
-                    <MyButton iconSize={getFontSizeInPixelBySize(TEXT_SIZE_4_EXTRA_LARGE)} textSize={TEXT_SIZE_4_EXTRA_LARGE} icon={"trash-can"} style={{borderColor: "red", borderWidth: 3}} onPress={() => {
+                    <MyButton isActive={true} backgroundColor={COLOR_WRONG} iconSize={getFontSizeInPixelBySize(TEXT_SIZE_4_EXTRA_LARGE)} textSize={TEXT_SIZE_4_EXTRA_LARGE} icon={"trash-can"} style={{borderColor: "red", borderWidth: 3}} onPress={() => {
                         setInput("");
                     }} />
                 </GridList>
