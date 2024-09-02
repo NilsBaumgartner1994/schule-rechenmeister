@@ -1,6 +1,7 @@
 import React from 'react';
 import {MyDrawer, useRenderMyDrawerScreen} from "@/components/drawer/MyDrawer";
 import {MyDrawerCustomItemProps} from "@/components/drawer/MyDrawerCustomItemCenter";
+import {getMyCustomHeaderNavigateHome} from "@/components/customHeader/MyCustomHeaderNavigateHome";
 
 export const unstable_settings = {
     // Ensure that reloading on `/modal` keeps a back button present.
@@ -53,6 +54,22 @@ export default function TabLayout() {
               showBackButton: true
           })}
           {useRenderMyDrawerScreen({
+              routeName: 'gamemode/selectPlayers/index',
+              label: "Spieleranzahl",
+              title: "Spieleranzahl",
+              icon: 'gamepad',
+              visibleInDrawer: false,
+              showBackButton: true
+          })}
+          {useRenderMyDrawerScreen({
+              routeName: 'gamemode/editPlayers/index',
+              label: "Spielernamen",
+              title: "Spielernamen",
+              icon: 'gamepad',
+              visibleInDrawer: false,
+              showBackButton: true
+          })}
+          {useRenderMyDrawerScreen({
               routeName: 'games/additionAndSubtraction/index',
               label: "Addition und Subtraktion",
               title: "Addition und Subtraktion",
@@ -66,7 +83,8 @@ export default function TabLayout() {
               title: "Spiel",
               icon: 'gamepad',
               visibleInDrawer: false,
-              showBackButton: false
+              showBackButton: false,
+              getHeader: getMyCustomHeaderNavigateHome()
           })}
           {useRenderMyDrawerScreen({
               routeName: 'games/little1x1/index',
@@ -82,7 +100,8 @@ export default function TabLayout() {
               title: "Spiel",
               icon: 'gamepad',
               visibleInDrawer: false,
-              showBackButton: false
+              showBackButton: false,
+              getHeader: getMyCustomHeaderNavigateHome()
           })}
           {useRenderMyDrawerScreen({
               routeName: 'playerStats/index',

@@ -1,15 +1,7 @@
-import {
-    View,
-    Text,
-    Heading,
-    TEXT_SIZE_3_EXTRA_LARGE,
-    TEXT_SIZE_6_EXTRA_LARGE,
-    TEXT_SIZE_4_EXTRA_LARGE, getFontSizeInPixelBySize
-} from '@/components/Themed';
+import {getFontSizeInPixelBySize, Heading, TEXT_SIZE_4_EXTRA_LARGE, View} from '@/components/Themed';
 import {AnimationKing} from "@/components/animations/AnimationKing";
 import {MyButton} from "@/components/buttons/MyButton";
 import React from "react";
-import {MyButtonCustomContentPadder} from "@/components/buttons/MyButtonCustom";
 import {router} from "expo-router";
 import {navigateToGameModeSelection} from "@/app/(app)/gamemode";
 
@@ -42,7 +34,7 @@ export default function TabOneScreen() {
                     width: "50%",
                     alignItems: "center",
                 }}>
-                    <MyButton iconSize={getFontSizeInPixelBySize(TEXT_SIZE_4_EXTRA_LARGE)} leftIcon={"play"} useOnlyNecessarySpace={false} textSize={TEXT_SIZE_4_EXTRA_LARGE} text={"START"} onPress={() => {
+                    <MyButton iconSize={getFontSizeInPixelBySize(TEXT_SIZE_4_EXTRA_LARGE)} leftIcon={"play"} useOnlyNecessarySpace={false} textSize={TEXT_SIZE_4_EXTRA_LARGE} text={"Start"} onPress={() => {
                         navigateToGameModeSelection();
                     }} />
                 </View>

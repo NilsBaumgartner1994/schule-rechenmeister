@@ -26,7 +26,7 @@ export const GridList: FunctionComponent<GridListProps> = (props) => {
         rows.push(currentRow);
     }
     return (
-        <View style={{flex: 1, flexDirection: "column", flexWrap: "wrap", width: "100%", justifyContent: "center"
+        <View style={{flexDirection: "column", flexWrap: "wrap", width: "100%", justifyContent: "center"
         }}>
             {rows.map((row, index) => {
                 return (

@@ -1,29 +1,29 @@
-import React, {FunctionComponent, useEffect, useState} from "react";
-import {Heading, Icon, TEXT_SIZE_4_EXTRA_LARGE, TEXT_SIZE_6_EXTRA_LARGE, View} from "@/components/Themed";
+import React, {useEffect, useState} from "react";
+import {Heading, TEXT_SIZE_4_EXTRA_LARGE, View} from "@/components/Themed";
 import {MyScrollView} from "@/components/scrollview/MyScrollView";
-import {router, useGlobalSearchParams} from "expo-router";
-import {MyTouchableOpacity} from "@/components/buttons/MyTouchableOpacity";
+import {router} from "expo-router";
 import {GridList} from "@/components/GridList";
-import {useMyContrastColor} from "@/helper/color/MyContrastColor";
-import {getRouteToAdditionAndSubtractionWithInput} from "@/app/(app)/games/additionAndSubtraction/gameWithInput";
 import {GameMode, useGameMode} from "@/states/SynchedGameMode";
 import {MyButton} from "@/components/buttons/MyButton";
-import {SelectAmountPlayersScreen} from "@/app/(app)/gamemode/SelectAmountPlayersScreen";
-import {useCurrentPlayers} from "@/states/SynchedProfile";
+import {useIsLargeDevice} from "@/helper/device/DeviceHelper";
+import {navigateToSelectAmountPlayers} from "@/app/(app)/gamemode/selectPlayers";
+import {nacigateToGames} from "@/app/(app)/games";
 
 export function navigateToGameModeSelection(){
     router.push("/(app)/gamemode");
 }
 
+const GAME_MODE_NAME_FLASHCARDS = "Rechenkarten";
+const GAME_MODE_NAME_MULTIPLAYER = "Mehrspieler";
+
 export default function TabOneScreen() {
 
-    function proceed(){
-        router.push("/(app)/games");
-    }
+    const isLargeDevice = useIsLargeDevice();
+    const amountColumns = isLargeDevice ? 2: 1;
 
     const [gameMode, setGameMode] = useGameMode()
     const [configurePlayers, setConfigurePlayers] = useState(false);
-    const [currentPlayer, setCurrentPlayer, setNextCurrentPlayer, players, setPlayers] = useCurrentPlayers();
+
 
     useEffect(() => {
         setConfigurePlayers(false)
@@ -31,35 +31,16 @@ export default function TabOneScreen() {
 
     function renderSelectGameMode(){
         return(
-            <GridList paddingVertical={20} paddingHorizontal={20} amountColumns={2}>
-                <MyButton textSize={TEXT_SIZE_4_EXTRA_LARGE} isActive={true} accessibilityLabel={"Flashcard"} onPress={() => {
+            <GridList paddingVertical={20} paddingHorizontal={20} amountColumns={amountColumns}>
+                <MyButton textSize={TEXT_SIZE_4_EXTRA_LARGE} isActive={true} accessibilityLabel={"Rechenkarten"} onPress={() => {
                     setGameMode(GameMode.FLASHCARDS);
-                    proceed();
-                } } text={"Flashcard"}  />
-                <MyButton textSize={TEXT_SIZE_4_EXTRA_LARGE} isActive={true} accessibilityLabel={"Flashcard"} onPress={() => {
-                    setConfigurePlayers(true);
-                } } text={"Spieler"}  />
+                    nacigateToGames();
+                } } text={GAME_MODE_NAME_FLASHCARDS}  />
+                <MyButton textSize={TEXT_SIZE_4_EXTRA_LARGE} isActive={true} accessibilityLabel={"Spiel"} onPress={() => {
+                    navigateToSelectAmountPlayers();
+                } } text={GAME_MODE_NAME_MULTIPLAYER}  />
             </GridList>
         )
-    }
-
-    function renderConfigurePlayers(){
-        return <SelectAmountPlayersScreen continue={() => {
-            setConfigurePlayers(false);
-            setGameMode(GameMode.PLAYERS);
-            // set players score to 0
-            let playerIds = Object.keys(players);
-            let newPlayers = {...players};
-            for(let i = 0; i < playerIds.length; i++){
-                let playerId = playerIds[i];
-                let player = newPlayers[playerId];
-                player.score = 0;
-            }
-            setPlayers(newPlayers);
-            proceed();
-        }} abort={() => {
-            setConfigurePlayers(false);
-        }} />
     }
 
   return (
@@ -74,8 +55,7 @@ export default function TabOneScreen() {
             }}>
                 <Heading>Wähle den Spielmodus</Heading>
             </View>
-            {configurePlayers ? renderConfigurePlayers() : null }
-            {configurePlayers ? null : renderSelectGameMode() }
+            {renderSelectGameMode()}
         </MyScrollView>
     </View>
   );

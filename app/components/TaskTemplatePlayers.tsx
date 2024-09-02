@@ -1,13 +1,11 @@
 import React, {FunctionComponent, useEffect, useState} from "react";
-import {getFontSizeInPixelBySize, Icon, Text, TEXT_SIZE_4_EXTRA_LARGE, View} from "@/components/Themed";
+import {getFontSizeInPixelBySize, Text, TEXT_SIZE_4_EXTRA_LARGE, View} from "@/components/Themed";
 import {MyButton} from "@/components/buttons/MyButton";
 import {GridList} from "@/components/GridList";
 import {useCurrentPlayers} from "@/states/SynchedProfile";
 import {AnimationDonkey} from "@/components/animations/AnimationDonkey";
 import {AnimationCorrect} from "@/components/animations/AnimationCorrect";
 import {AnimationWrong} from "@/components/animations/AnimationWrong";
-import {useGameMode} from "@/states/SynchedGameMode";
-import {navigateToPlayerStats} from "@/app/(app)/playerStats";
 import {ScrollView} from "react-native";
 import {useMyContrastColor} from "@/helper/color/MyContrastColor";
 
@@ -46,6 +44,7 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
     const [input, setInput] = useState("");
 
     const [currentPlayer, setCurrentPlayer, setNextCurrentPlayer, players, setPlayers] = useCurrentPlayers();
+
 
     if(!currentTaskWithSolution){
         return null;
@@ -87,6 +86,32 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
         )
     }
 
+    function renderPlayerStats(){
+        let output = [];
+        const playerKeyOrder = Object.keys(players);
+        const highestScore = playerKeyOrder.map(playerKey => players[playerKey].score).reduce((a, b) => Math.max(a, b), 0);
+
+
+        for(let i=0; i<playerKeyOrder.length; i++){
+            const playerKey = playerKeyOrder[i];
+            const player = players[playerKey];
+            const name = player.name;
+            const score = player.score
+            const text = name + ": " + score;
+            const isPlayerActive = currentPlayer?.id === player.id;
+            const leftIcon = isPlayerActive ? "account-circle" : "account-clock";
+            const rightIcon = (highestScore === score && score > 0) ? "crown" : undefined;
+
+            output.push(
+                <MyButton leftIcon={leftIcon} rightIcon={rightIcon} isActive={isPlayerActive} accessibilityLabel={text} text={text} />
+            )
+        }
+
+        return <GridList paddingVertical={5} paddingHorizontal={5} amountColumns={4}>
+            {output}
+        </GridList>
+    }
+
     function renderAnimationOverlay(animationComponent: any, hideSolution?: boolean){
         let correctSolutionView: any = (
             <View>
@@ -100,7 +125,6 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
         return (
             <View style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%", alignItems: "center", justifyContent: "center", padding: "20px"}}>
                 <View style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "white", opacity: 0.95}}></View>
-                <View style={{width: "100%", height: "200px"}} />
                 {correctSolutionView}
                 {animationComponent}
             </View>
@@ -227,28 +251,24 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
     }, [showAnimation])
 
   return (
-      <ScrollView>
-          <View style={{width: "100%", padding: "20px"}}>
-              {renderPlayerName()}
-              {renderTask()}
-              <View style={{height: "10px"}} />
-              {renderInputRow()}
-              <View style={{height: "10px"}} />
-              <View style={{height: "30px"}} />
-              <View style={{
-                  width: "100%",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "center",
-              }}>
-                  <View>
-                      <MyButton accessibilityLabel={"zur Punkteübersicht"} text={"zur Punkteübersicht"} leftIcon={"medal"} onPress={() => {
-                          navigateToPlayerStats();
-                      }} />
-                  </View>
+      <View style={{width: "100%", height: "100%"}}>
+          <View style={{width: "100%", height: "100%", flexDirection: "column", justifyContent: "space-between"}}>
+              <View style={{width: "100%", flex: 1}}>
+                  <ScrollView>
+                      <View style={{width: "100%", padding: "20px"}}>
+                          {renderPlayerName()}
+                          {renderTask()}
+                          <View style={{height: "10px"}} />
+                          {renderInputRow()}
+
+                      </View>
+                  </ScrollView>
               </View>
-              {renderAnimation()}
+              <View style={{width: "100%"}}>
+                    {renderPlayerStats()}
+              </View>
           </View>
-      </ScrollView>
+          {renderAnimation()}
+      </View>
   );
 }

@@ -8,6 +8,10 @@ import {MyButton} from "@/components/buttons/MyButton";
 import {getRouteToAdditionAndSubtractionIndex} from "@/app/(app)/games/additionAndSubtraction";
 import {getRouteToMultiplicationAndDivisionIndex} from "@/app/(app)/games/little1x1";
 
+export function nacigateToGames(){
+    router.push("/(app)/games");
+}
+
 export default function TabOneScreen() {
 
     type DataItem = { key: string; data: {
