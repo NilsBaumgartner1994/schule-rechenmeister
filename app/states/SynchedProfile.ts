@@ -12,9 +12,10 @@ import {useCallback} from "react";
 import {useLocales as useLocalesExpo} from "expo-localization";
 import {useSynchedLanguagesDict} from "@/states/SynchedLanguages";
 import {PlatformHelper} from "@/helper/PlatformHelper";
+import {NonPersistentStore} from "@/helper/syncState/NonPersistentStore";
 
 export function useSynchedProfileSetter(): [(callback: (currentValue: Partial<Profiles> | null | undefined) => Partial<Profiles> | null | undefined, sync_cache_composed_key_local?: string) => void, (callback: (currentValue: NewValueRawSingleType<Partial<Profiles>> | null | undefined) => NewValueRawSingleType<Partial<Profiles>> | null | undefined) => void] {
-    const [setResource, setResourceRaw] = useSynchResourceSingleRawSetter<Partial<Profiles>>(PersistentStore.profile);
+    const [setResource, setResourceRaw] = useSynchResourceSingleRawSetter<Partial<Profiles>>(NonPersistentStore.profile);
 
     const isServerOnline = useIsServerOnline()
     const isCurrentUserAnonymous = useIsCurrentUserAnonymous();
@@ -54,20 +55,20 @@ export type Player = {
 
 export function useCurrentPlayers(): [Player | null | undefined, (player: Player) => void, () => void, Record<string, Player>, (newPlayers: Record<string, Player> | null | undefined) => void] {
     const [profile, setProfile] = useSynchedProfile();
+    console.log("useCurrentPlayers, profile: ", profile);
     const currentPlayerId = profile?.currentPlayerId || 1;
-    const players: Record<string, Player> = profile?.players || {
-        1: {
-            id: 1,
-            name: "Spieler 1",
-            score: 0,
-        }
-    }
+    const players: Record<string, Player> = profile?.players || {}
     const currentPlayer = players[currentPlayerId];
     const setPlayers = useCallback((newPlayers: Record<string, Player> | null | undefined) => {
             setProfile((currentValue) => {
+                console.log("setPlayers, newPlayers: ", newPlayers);
+                if(!currentValue){
+                    currentValue = {};
+                }
                 if(currentValue){
                     currentValue.players = newPlayers;
                 }
+                console.log("setPlayers, currentValue: ", currentValue);
                 return currentValue;
             });
         }, [setProfile]);
@@ -100,7 +101,7 @@ export function useCurrentPlayers(): [Player | null | undefined, (player: Player
 }
 
 export function useSynchedProfileId(): string | null | undefined {
-    const profile = useSynchedResourceSingleRawValue<Profiles, (string | null | undefined)>(PersistentStore.profile, (storedProfileRaw) => {
+    const profile = useSynchedResourceSingleRawValue<Profiles, (string | null | undefined)>(NonPersistentStore.profile, (storedProfileRaw) => {
         return storedProfileRaw?.data?.id
     });
     return profile;
@@ -108,9 +109,9 @@ export function useSynchedProfileId(): string | null | undefined {
 
 export function useSynchedProfile(): [Partial<Profiles>, (callback: (currentValue: Partial<Profiles> | null | undefined) => Partial<Profiles> | null | undefined, sync_cache_composed_key_local?: string) => void]
 {
-    //const [resourceOnly, setResource, resourceRaw, setResourceRaw] = useSynchedResourceSingleRaw<Partial<Profiles>>(PersistentStore.profile);
+    //const [resourceOnly, setResource, resourceRaw, setResourceRaw] = useSynchedResourceSingleRaw<Partial<Profiles>>(NonPersistentStore.profile);
     const [usedSetResource, setResourceRaw] = useSynchedProfileSetter();
-    const resourceRaw = useSynchedResourceSingleRawValue<Profiles, NewValueRawSingleType<Profiles>>(PersistentStore.profile)
+    const resourceRaw = useSynchedResourceSingleRawValue<Profiles, NewValueRawSingleType<Profiles>>(NonPersistentStore.profile)
     const resourceOnly = resourceRaw?.data
 
     let usedResource = resourceOnly;
@@ -127,7 +128,7 @@ export function useProfileLanguageCode(): [string, ((newValue: string | null | u
     const deviceLocaleCodesWithoutRegionCode = useDeviceLocaleCodesWithoutRegionCode();
     const [languageDict, setLanguageDict] = useSynchedLanguagesDict();
 
-    const profileLanguageSaved = useSynchedResourceSingleRawValue<Profiles, (string | Languages | null | undefined)>(PersistentStore.profile, (storedProfileRaw) => {
+    const profileLanguageSaved = useSynchedResourceSingleRawValue<Profiles, (string | Languages | null | undefined)>(NonPersistentStore.profile, (storedProfileRaw) => {
         return storedProfileRaw?.data?.language
     });
 

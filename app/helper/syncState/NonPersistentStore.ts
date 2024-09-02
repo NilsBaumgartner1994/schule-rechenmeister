@@ -7,9 +7,7 @@ export class NonPersistentStore {
 	static textDimensions = 'NonPersistentStore.textDimensions'
 	static iconDimensions = 'NonPersistentStore.iconDimensions'
 
-	static foodOfferSelectedDate = 'NonPersistentStore.foodOfferSelectedDate'
-
-	static foodOfferCache = 'NonPersistentStore.foodOfferCache'
+	static profile = 'NonPersistenStore.profile'
 }
 
 type ValueOf<T> = T[keyof T];

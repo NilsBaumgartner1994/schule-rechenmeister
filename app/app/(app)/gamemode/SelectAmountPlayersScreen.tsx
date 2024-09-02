@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from "react";
 import {Player, useCurrentPlayers} from "@/states/SynchedProfile";
-import {Heading, TextInput, View, Text, TEXT_SIZE_4_EXTRA_LARGE} from "@/components/Themed";
+import {Heading, TextInput, View, Text, TEXT_SIZE_4_EXTRA_LARGE, useViewBackgroundColor} from "@/components/Themed";
 import {TouchableOpacity} from "react-native";
 import {MyButton} from "@/components/buttons/MyButton";
 import {GridList} from "@/components/GridList";
@@ -18,6 +18,9 @@ export const SelectAmountPlayersScreen: FunctionComponent<SelectAmountPlayersScr
     const maxPlayers = 4;
     const projectColor = useProjectColor()
     const projectColorContrast = useMyContrastColor(projectColor);
+
+    const viewBackgroundColor = useViewBackgroundColor()
+    const viewContrastColor = useMyContrastColor(viewBackgroundColor);
 
     const refs = {};
 
@@ -49,11 +52,12 @@ export const SelectAmountPlayersScreen: FunctionComponent<SelectAmountPlayersScr
                     }}>
                         <View style={{
                             flex: 1,
-                            backgroundColor: "white",
+                            backgroundColor: viewBackgroundColor,
                         }}>
                             <TextInput
                                 value={player?.name}
-                                style={{width: "100%", height: "100%"}} placeholder={"Name"} onChangeText={(newName) => {
+                                key={viewContrastColor}
+                                style={{width: "100%", height: "100%", color: viewContrastColor}} placeholder={"Name"} onChangeText={(newName) => {
                                     player.name = newName;
                                     setPlayers({...players});
                             }} />
@@ -115,11 +119,12 @@ export const SelectAmountPlayersScreen: FunctionComponent<SelectAmountPlayersScr
                             let id = j;
                             let newPlayer = {
                                 id: id,
-                                name: "",
+                                name: "Spieler "+id,
                                 score: 0,
                             }
                             newPlayers[j] = newPlayer;
                         }
+                        console.log(newPlayers);
                         setPlayers(newPlayers);
                     }} text={i+" Spieler"} />
                 );
