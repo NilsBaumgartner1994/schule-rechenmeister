@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from "react";
-import {Heading, Icon, View, Text} from "@/components/Themed";
+import {Heading, Icon, View, Text, useViewBackgroundColor} from "@/components/Themed";
 import {MyScrollView} from "@/components/scrollview/MyScrollView";
 import {router, useGlobalSearchParams} from "expo-router";
 import {MyTouchableOpacity} from "@/components/buttons/MyTouchableOpacity";
@@ -28,6 +28,10 @@ export default function TabOneScreen() {
     const COLOR_MEDIUM = "#fff2cc";
     const COLOR_HARD = "#f4cccc";
 
+
+    const viewBackgroundColor = useViewBackgroundColor();
+    const viewContrastColor = useMyContrastColor(viewBackgroundColor);
+
     const params = useGlobalSearchParams<{[AdditionAndSubstractionIndexParamMax]: string}>();
     const max = parseInt(params[AdditionAndSubstractionIndexParamMax]) || 20;
 
@@ -36,7 +40,7 @@ export default function TabOneScreen() {
         const colorContrast = useMyContrastColor(color);
 
         return (
-            <MyTouchableOpacity accessibilityLabel={name} style={{borderColor: "black", borderWidth: 1, borderRadius: 5, overflow: "hidden"}} onPress={() => {
+            <MyTouchableOpacity accessibilityLabel={name} style={{borderColor: viewContrastColor, borderWidth: 1, borderRadius: 5, overflow: "hidden"}} onPress={() => {
                 router.push(getRouteToAdditionAndSubtractionWithInput(gameType));
             }}>
                 <View style={{

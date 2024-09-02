@@ -1,5 +1,5 @@
 import React from "react";
-import {Heading, Icon, View} from "@/components/Themed";
+import {Heading, Icon, useViewBackgroundColor, View} from "@/components/Themed";
 import {MyScrollView} from "@/components/scrollview/MyScrollView";
 import {MyTouchableOpacity} from "@/components/buttons/MyTouchableOpacity";
 import {GridList} from "@/components/GridList";
@@ -24,11 +24,14 @@ export default function TabOneScreen() {
     const COLOR_MEDIUM = "#fff2cc";
     const COLOR_HARD = "#f4cccc";
 
+    const viewBackgroundColor = useViewBackgroundColor();
+    const viewContrastColor = useMyContrastColor(viewBackgroundColor);
+
     function renderGameType(name: string, description: string, gameType: MultiplicationAndDivisionGameProps, level: JSX.Element, color: string){
         const colorContrast = useMyContrastColor(color);
 
         return (
-            <MyTouchableOpacity accessibilityLabel={name} style={{borderColor: "black", borderWidth: 1, borderRadius: 5, overflow: "hidden"}} onPress={() => {
+            <MyTouchableOpacity accessibilityLabel={name} style={{borderColor: viewContrastColor, borderWidth: 1, borderRadius: 5, overflow: "hidden"}} onPress={() => {
                 router.push(getRouteToMultiplicationAndDivisionWithInput(gameType));
             }}>
                 <View style={{
