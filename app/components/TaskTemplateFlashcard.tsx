@@ -1,5 +1,5 @@
 import React, {FunctionComponent, useState} from "react";
-import {Text, TEXT_SIZE_6_EXTRA_LARGE, View} from "@/components/Themed";
+import {Text, TEXT_SIZE_2_EXTRA_LARGE, TEXT_SIZE_6_EXTRA_LARGE, View} from "@/components/Themed";
 import {TouchableOpacity} from "react-native";
 import {useMyContrastColor} from "@/helper/color/MyContrastColor";
 
@@ -61,6 +61,7 @@ export const TaskTemplateFlashcard: FunctionComponent<TaskTemplateProps> = (prop
 
     function renderSolution() {
         const text = showSolution ? solution : "?";
+        const textOnPress = showSolution ? "Nächste Aufgabe" : "Lösung anzeigen";
 
         return (
             <View>
@@ -71,12 +72,17 @@ export const TaskTemplateFlashcard: FunctionComponent<TaskTemplateProps> = (prop
                         alignItems: "center",
                         backgroundColor: COLOR_TASK,
                         paddingHorizontal: "30px",
+                        borderWidth: "2px",
+                        borderColor: textColor,
                         borderRadius: "20px"
                     }}>
                         <View style={{width: "100%", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
                             <Text style={{
                                 color: textColor
                             }} size={TEXT_SIZE_6_EXTRA_LARGE} bold={true}>{text}</Text>
+                            <Text style={{
+                                color: textColor
+                            }} size={TEXT_SIZE_2_EXTRA_LARGE} bold={true}>{textOnPress}</Text>
                         </View>
                     </View>
                 </TouchableOpacity>
