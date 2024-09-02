@@ -36,7 +36,7 @@ export function useServerInfo() {
 		info: {
 			project: {
 				project_name: 'Schule Rechenmeister',
-				project_descriptor: 'Baumgartner Software UG',
+				project_descriptor: '',
 				default_language: 'de-DE',
 				project_logo: null,
 				project_color: '#27398D',

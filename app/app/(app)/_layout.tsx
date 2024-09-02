@@ -10,6 +10,20 @@ export const unstable_settings = {
 export default function TabLayout() {
 
     const customDrawerItems: MyDrawerCustomItemProps[] = []
+
+    customDrawerItems.push({
+        label: "Nils Baumgartner",
+        onPressExternalRouteTo: "https://nilsbaumgartner.de",
+        visibleInDrawer: false,
+        visibleInBottomDrawer: true
+    })
+
+    customDrawerItems.push({
+        label: "Projektseite",
+        onPressExternalRouteTo: "https://github.com/NilsBaumgartner1994/schule-rechenmeister",
+        visibleInDrawer: false,
+        visibleInBottomDrawer: true
+    })
     
   return (
       <MyDrawer
