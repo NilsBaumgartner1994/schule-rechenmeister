@@ -42,7 +42,7 @@ export default function TabOneScreen() {
                       flexDirection: "row",
                       width: "100%",
                   }}>
-                      <Heading>{"Spieler Anzahl wählen"}</Heading>
+                      <Heading>{"Spieleranzahl wählen"}</Heading>
                   </View>
                   <GridList amountColumns={amountColumns} paddingVertical={20} paddingHorizontal={20}>
                       {renderSelectAmountPlayers()}

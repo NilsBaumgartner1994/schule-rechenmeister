@@ -26,7 +26,7 @@ export function getDimensionWidthBreakPoints(): BreakPointsDictionary<number> {
 export function useIsLargeDevice(): boolean {
 	return useBreakPointValue({
 		[BreakPoint.sm]: false,
-		[BreakPoint.xxl]: true,
+		[BreakPoint.md]: true,
 	});
 }
 

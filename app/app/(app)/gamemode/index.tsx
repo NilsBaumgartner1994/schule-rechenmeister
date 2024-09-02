@@ -13,8 +13,8 @@ export function navigateToGameModeSelection(){
     router.push("/(app)/gamemode");
 }
 
-const GAME_MODE_NAME_FLASHCARDS = "Rechenkarten";
-const GAME_MODE_NAME_MULTIPLAYER = "Mehrspieler";
+const GAME_MODE_NAME_FLASHCARDS = "Karten";
+const GAME_MODE_NAME_MULTIPLAYER = "Spiel";
 
 export default function TabOneScreen() {
 
@@ -32,11 +32,11 @@ export default function TabOneScreen() {
     function renderSelectGameMode(){
         return(
             <GridList paddingVertical={20} paddingHorizontal={20} amountColumns={amountColumns}>
-                <MyButton textSize={TEXT_SIZE_4_EXTRA_LARGE} isActive={true} accessibilityLabel={"Rechenkarten"} onPress={() => {
+                <MyButton textSize={TEXT_SIZE_4_EXTRA_LARGE} isActive={true} accessibilityLabel={GAME_MODE_NAME_FLASHCARDS} onPress={() => {
                     setGameMode(GameMode.FLASHCARDS);
                     nacigateToGames();
                 } } text={GAME_MODE_NAME_FLASHCARDS}  />
-                <MyButton textSize={TEXT_SIZE_4_EXTRA_LARGE} isActive={true} accessibilityLabel={"Spiel"} onPress={() => {
+                <MyButton textSize={TEXT_SIZE_4_EXTRA_LARGE} isActive={true} accessibilityLabel={GAME_MODE_NAME_MULTIPLAYER} onPress={() => {
                     navigateToSelectAmountPlayers();
                 } } text={GAME_MODE_NAME_MULTIPLAYER}  />
             </GridList>
@@ -53,7 +53,7 @@ export default function TabOneScreen() {
                 flexDirection: "row",
                 width: "100%",
             }}>
-                <Heading>Wähle den Spielmodus</Heading>
+                <Heading>{"Wähle den Spielmodus"}</Heading>
             </View>
             {renderSelectGameMode()}
         </MyScrollView>
