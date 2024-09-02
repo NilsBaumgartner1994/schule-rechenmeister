@@ -1,0 +1,206 @@
+import React, {Dispatch, FunctionComponent, SetStateAction, useEffect, useRef, useState} from 'react';
+import {SettingsRowProps} from './SettingsRow';
+import {TextInput, View} from '@/components/Themed';
+import {SettingsRowActionsheet} from '@/components/settings/SettingsRowActionsheet';
+import {MyButton} from '@/components/buttons/MyButton';
+import {ReturnKeyType} from '@/helper/input/ReturnKeyType';
+import {IconNames} from '@/constants/IconNames';
+import {TranslationKeys, useTranslation} from '@/helper/translations/Translation';
+import {MyModalActionSheetItem} from "@/components/modal/MyModalActionSheet";
+
+interface MyContentProps {
+    initialValue: string | undefined | null,
+    setInputValue: Dispatch<SetStateAction<number | undefined | null>>,
+    onSave: (value: number | undefined | null, hide: () => void) => void,
+    placeholder?: string,
+    hide: () => void,
+}
+const MyContent: FunctionComponent<MyContentProps> = (props) => {
+	const {setInputValue} = props;
+	const [inputValueLocal, setInputValueLocal] = useState(props?.initialValue)
+
+	const translation_cancel = useTranslation(TranslationKeys.cancel)
+	const translation_save = useTranslation(TranslationKeys.save)
+
+	const inputRef = useRef<any>(null);
+
+	function handleFocusTextInput() {
+		// Workaround for android: https://github.com/facebook/react-native/issues/19366
+		if (inputRef.current) {
+			inputRef.current.blur();
+
+			setTimeout(() => {
+				inputRef.current.focus();
+			}, 100);
+		}
+	}
+
+	// After the component mounts, focus the input
+	useEffect(() => {
+		handleFocusTextInput();
+	}, [inputRef?.current])
+
+	function handleOnSave() {
+		let asNumber: number | undefined | null = null;
+		if (inputValueLocal) {
+			asNumber = parseFloat(inputValueLocal)
+		}
+		props.onSave(asNumber, props.hide);
+	}
+
+	const usedValue = inputValueLocal || '';
+
+	return (
+		<View style={{
+			width: '100%',
+			marginTop: 10,
+			paddingHorizontal: 10,
+		}}
+		>
+			<View style={{
+				width: '100%',
+			}}
+			>
+				<TextInput
+					myRef={inputRef}
+					value={usedValue+""}
+					isNumber={true}
+					onChangeText={(newText: string) => {
+						let usedNewText: string | undefined | null = newText;
+						console.log('OnChangeNumber')
+						console.log(newText);
+						let usedNewTextNumber: string |null |undefined = null
+						if (usedNewText==='') {
+							usedNewText = null;
+						} else if(usedNewText) {
+							// replace all characters that are not numbers and keep the dot or comma
+							usedNewTextNumber = usedNewText.replace(/[^0-9.,]/g, '');
+						}
+						let asNumber: number | undefined | null = null;
+						if (usedNewTextNumber) {
+							asNumber = parseFloat(usedNewTextNumber)
+						}
+
+						if (setInputValue) {
+							setInputValue(asNumber);
+							setInputValueLocal(usedNewTextNumber);
+						}
+					}}
+					returnKeyType={ReturnKeyType.done}
+					onSubmitEditing={handleOnSave}
+					placeholder={props?.placeholder}
+				/>
+			</View>
+			<View style={{
+				width: '100%', flexDirection: 'row', marginTop: 10, justifyContent: 'flex-end', marginBottom: 10
+			}}
+			>
+				<MyButton useOnlyNecessarySpace={true}
+					isActive={false}
+					accessibilityLabel={translation_cancel}
+					text={translation_cancel}
+					onPress={async () => {
+						props?.hide()
+					}}
+					leftIcon={IconNames.cancel_icon}
+				/>
+				<View style={{
+					// small space between the buttons
+					width: 10,
+				}}
+				/>
+				<MyButton useOnlyNecessarySpace={true} accessibilityLabel={translation_save} text={translation_save} onPress={handleOnSave} isActive={true} leftIcon={IconNames.save_icon} />
+			</View>
+		</View>
+	)
+}
+
+interface SettingsRowNumberEditSpeicificProps {
+    accessibilityLabel: string,
+    placeholder?: string,
+    labelLeft: string,
+    // onSave is a function that returns a boolean or a promise that resolves to a boolean or void or Dispatch<SetStateAction<string>>
+    onSave: (value: number | undefined | null, hide?: () => void) => (boolean | void | Promise<boolean | void>) | Dispatch<SetStateAction<number | undefined | null>>,
+    onTrackColor?: string,
+    debug?: boolean,
+    value?: number | undefined | null,
+    disabled?: boolean
+    description?: string,
+}
+
+export type SettingsRowTextEditProps = SettingsRowProps & SettingsRowNumberEditSpeicificProps;
+
+export const SettingsRowNumberEdit = ({accessibilityLabel, labelLeft, rightIcon,...props}: SettingsRowTextEditProps) => {
+	const title = labelLeft;
+
+
+	let initialValueRaw = props?.value || props.labelRight
+	let initialValue: number | undefined | null = null;
+	if (initialValueRaw!==undefined && initialValueRaw!==null && initialValueRaw!=="") {
+		initialValue = parseFloat(initialValueRaw+"")
+	}
+	const placeholder = props.placeholder;
+	const [inputValue, setInputValue] = useState<number |undefined |null>(initialValue)
+	let labelRight = inputValue+""
+	if (props.labelRight) {
+		labelRight = props.labelRight+""
+	}
+
+	async function onSaveChange(finalValue: number | undefined | null, hide: () => void) {
+		//console.log("Save Final Value: ", finalValue);
+		let result: boolean = true;
+		// check if onSave is a function with one or two parameters
+		let hasTwoParameters = false;
+		if (props.onSave.length===2) {
+			hasTwoParameters = true;
+		}
+
+		if (props.onSave) {
+			//console.log("Has onSave")
+			const resultFromOnSave = await props.onSave(finalValue, hide);
+			//console.log("Result from onSave: ", resultFromOnSave);
+			if (resultFromOnSave===false) {
+				result = false;
+			}
+		}
+
+		setInputValue(initialValue)
+
+		if (!hasTwoParameters && result) {
+			hide()
+		}
+	}
+
+	const config: MyModalActionSheetItem = {
+		onCancel: async () => {
+			setInputValue(initialValue)
+			return true;
+		},
+		label: title,
+		accessibilityLabel: accessibilityLabel,
+		key: title,
+		title: title,
+		renderAsContentInsteadItems: (key: string, hide: () => void) => {
+			// Use the custom context provider to provide the input value and setter
+			return (
+				<MyContent
+					initialValue={initialValue+""}
+					setInputValue={setInputValue}
+					onSave={onSaveChange}
+					placeholder={placeholder}
+					hide={hide}
+				/>
+			)
+		}
+
+	}
+
+	let usedIconRight = rightIcon;
+	if (usedIconRight===undefined) {
+		usedIconRight = IconNames.edit_icon
+	}
+
+	return (
+		<SettingsRowActionsheet rightIcon={usedIconRight} labelLeft={labelLeft} labelRight={labelRight} config={config} accessibilityLabel={accessibilityLabel} {...props}  />
+	)
+}
