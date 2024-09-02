@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - main
     paths:
       - 'app/**'
       - ".github/workflows/frontend_web_ghpages_production.yml"
