@@ -57,6 +57,7 @@ export const SettingsRowBooleanSwitch: FunctionComponent<AppState & SettingsRowP
 
 	const rightContent: any = (
 		<View style={{
+			paddingLeft: 10,
 			paddingRight: 0,
 			justifyContent: 'center',
 			alignItems: 'center',

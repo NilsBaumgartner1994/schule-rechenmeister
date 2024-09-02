@@ -26,6 +26,7 @@ import {MyScrollView} from "@/components/scrollview/MyScrollView";
 import {PlatformHelper} from "@/helper/PlatformHelper";
 import {DrawerStatus} from "@react-navigation/native";
 import InaccessibleAndHidden from "@/helper/accessibility/InaccessableAndHidden";
+import {SettingsRowSyncBooleanSwitch} from "@/components/settings/SettingsRowSyncThemeSwitch";
 
 export type MyDrawerItemProps = {
     routeName: string;
@@ -232,6 +233,7 @@ function DrawerContentWrapper(props: DrawerContentWrapperProps) {
 						</View>
 					</MyScrollView>
 				</View>
+				<SettingsRowSyncBooleanSwitch/>
 				{getMyDrawerItemsBottom(props)}
 			</MyDrawerSafeAreaView>
 		</InaccessibleAndHidden>
