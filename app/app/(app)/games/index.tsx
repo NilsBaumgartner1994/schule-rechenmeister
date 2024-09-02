@@ -53,8 +53,14 @@ export default function TabOneScreen() {
         justifyContent: 'center',
     }}>
         <View style={{width: "100%"}}>
-            <View style={{width: "100%", alignItems: "center"}}>
-                <Heading>{"Wähle das Spiel"}</Heading>
+            <View style={{
+                padding: 20,
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "row",
+                width: "100%",
+            }}>
+                <Heading>{"Wähle die Kategorie"}</Heading>
             </View>
            <MyGridFlatList data={data} renderItem={renderItem} amountColumns={amountColumns} />
         </View>

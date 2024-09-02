@@ -65,7 +65,15 @@ export default function TabOneScreen() {
   return (
     <View style={{width: "100%", height: "100%"}}>
         <MyScrollView>
-            <Heading>Wähle den Spielmodus</Heading>
+            <View style={{
+                padding: 20,
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "row",
+                width: "100%",
+            }}>
+                <Heading>Wähle den Spielmodus</Heading>
+            </View>
             {configurePlayers ? renderConfigurePlayers() : null }
             {configurePlayers ? null : renderSelectGameMode() }
         </MyScrollView>
