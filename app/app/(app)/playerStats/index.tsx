@@ -30,8 +30,7 @@ export default function TabOneScreen() {
             alignItems: "center",
             padding: "10px",
             borderRadius: "10px",
-            borderWidth: "2px",
-            borderColor: projectColor,
+            backgroundColor: projectColor,
         }}>
             <Text size={TEXT_SIZE_4_EXTRA_LARGE}>{player.name}</Text>
             <Text size={TEXT_SIZE_4_EXTRA_LARGE}>{score}</Text>
@@ -74,17 +73,24 @@ export default function TabOneScreen() {
                     alignItems: "center",
                     justifyContent: "center",
                 }}>
-                    <View>
-                        <MyButton paddingHorizontal={50} isActive={true} accessibilityLabel={"zur Startseite"} useOnlyNecessarySpace={true} text={"zur Startseite"} leftIcon={"home"} onPress={() => {
-                            navigateToHome();
-                        }} />
-                    </View>
                     <View style={{alignItems: "center", justifyContent: "center"}}>
                         <Heading bold={true}>{"Punkte"}</Heading>
                     </View>
                 </View>
                 <View style={{width: "100%", height: "20px"}} />
                 {renderPlayers()}
+                <View style={{width: "100%", height: "20px"}} />
+                <View style={{
+                    width: "100%",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}>
+                    <View>
+                        <MyButton paddingHorizontal={50} isActive={true} accessibilityLabel={"zur Startseite"} useOnlyNecessarySpace={true} text={"zur Startseite"} leftIcon={"home"} onPress={() => {
+                            navigateToHome();
+                        }} />
+                    </View>
+                </View>
             </ScrollView>
         </View>
     );
