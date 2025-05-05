@@ -7,13 +7,17 @@ import {GridList} from "@/components/GridList";
 import {useMyContrastColor} from "@/helper/color/MyContrastColor";
 import {getRouteToAdditionAndSubtractionWithInput} from "@/app/(app)/games/additionAndSubtraction/gameWithInput";
 
+export enum AdditionAndSubtractionGameDifficulty {
+    EASY = "easy",
+    MEDIUM = "medium",
+    HARD = "hard"
+}
 
 export type AdditionAndSubtractionGameProps = {
     max: number;
     addition: boolean;
     subtraction: boolean;
-    withTenTransition: boolean;
-    withTenTransitionEasy: boolean;
+    difficulty: AdditionAndSubtractionGameDifficulty;
 }
 
 export const AdditionAndSubstractionIndexParamMax = "max";
@@ -43,6 +47,7 @@ export default function TabOneScreen() {
             <MyTouchableOpacity accessibilityLabel={name} style={{borderColor: viewContrastColor, borderWidth: 1, borderRadius: 5, overflow: "hidden"}} onPress={() => {
                 router.push(getRouteToAdditionAndSubtractionWithInput(gameType));
             }}>
+                {/* @ts-ignore */}
                 <View style={{
                     width: "100%",
                     alignItems: "center",
@@ -85,107 +90,92 @@ export default function TabOneScreen() {
                 max: 20,
                 addition: true,
                 subtraction: false,
-                withTenTransition: false,
-                withTenTransitionEasy: false
+                difficulty: AdditionAndSubtractionGameDifficulty.EASY,
             }, renderStars(1, "einfach"), COLOR_EASY))
             output.push(renderGameType("Addition (+)", {
                 max: 20,
                 addition: true,
                 subtraction: false,
-                withTenTransition: true,
-                withTenTransitionEasy: false
+                difficulty: AdditionAndSubtractionGameDifficulty.HARD,
             }, renderStars(2, "schwer"), COLOR_HARD))
             output.push(renderGameType("Subtraktion (–)", {
                 max: 20,
                 addition: false,
                 subtraction: true,
-                withTenTransition: false,
-                withTenTransitionEasy: false
+                difficulty: AdditionAndSubtractionGameDifficulty.EASY,
             }, renderStars(1, "einfach"), COLOR_EASY))
             output.push(renderGameType("Subtraktion (–)", {
                 max: 20,
                 addition: false,
                 subtraction: true,
-                withTenTransition: true,
-                withTenTransitionEasy: false
+                difficulty: AdditionAndSubtractionGameDifficulty.HARD,
             }, renderStars(2, "schwer"), COLOR_HARD))
             output.push(renderGameType("Mix (+,–)", {
                 max: 20,
                 addition: true,
                 subtraction: true,
-                withTenTransition: false,
-                withTenTransitionEasy: false
+                difficulty: AdditionAndSubtractionGameDifficulty.EASY,
             }, renderStars(1, "einfach"), COLOR_EASY))
             output.push(renderGameType("Mix (+,–)", {
                 max: 20,
                 addition: true,
                 subtraction: true,
-                withTenTransition: true,
-                withTenTransitionEasy: false
+                difficulty: AdditionAndSubtractionGameDifficulty.HARD,
             }, renderStars(2, "schwer"), COLOR_HARD))
         } else {
             output.push(renderGameType("Addition (+)", {
                 max: 100,
                 addition: true,
                 subtraction: false,
-                withTenTransition: false,
-                withTenTransitionEasy: false
+                difficulty: AdditionAndSubtractionGameDifficulty.EASY,
             }, renderStars(1, "einfach"), COLOR_EASY))
             output.push(renderGameType("Addition (+)", {
                 max: 100,
                 addition: true,
                 subtraction: false,
-                withTenTransition: true,
-                withTenTransitionEasy: true
+                difficulty: AdditionAndSubtractionGameDifficulty.MEDIUM,
             }, renderStars(2, "mittel"), COLOR_MEDIUM))
             output.push(renderGameType("Addition (+)", {
                 max: 100,
                 addition: true,
                 subtraction: false,
-                withTenTransition: true,
-                withTenTransitionEasy: false
+                difficulty: AdditionAndSubtractionGameDifficulty.HARD,
             }, renderStars(3, "schwer"), COLOR_HARD))
             output.push(renderGameType("Subtraktion (–)", {
                 max: 100,
                 addition: false,
                 subtraction: true,
-                withTenTransition: false,
-                withTenTransitionEasy: false
+                difficulty: AdditionAndSubtractionGameDifficulty.EASY,
             }, renderStars(1, "einfach"), COLOR_EASY))
             output.push(renderGameType("Subtraktion (–)", {
                 max: 100,
                 addition: false,
                 subtraction: true,
-                withTenTransition: true,
-                withTenTransitionEasy: true
+                difficulty: AdditionAndSubtractionGameDifficulty.MEDIUM,
             }, renderStars(2, "mittel"), COLOR_MEDIUM))
             output.push(renderGameType("Subtraktion (–)", {
                 max: 100,
                 addition: false,
                 subtraction: true,
-                withTenTransition: true,
-                withTenTransitionEasy: false
+                difficulty: AdditionAndSubtractionGameDifficulty.HARD,
             }, renderStars(3, "schwer"), COLOR_HARD))
             output.push(renderGameType("Mix (+,–)", {
                 max: 100,
                 addition: true,
                 subtraction: true,
-                withTenTransition: false,
-                withTenTransitionEasy: false
+                difficulty: AdditionAndSubtractionGameDifficulty.EASY,
             }, renderStars(1, "einfach"), COLOR_EASY))
             output.push(renderGameType("Mix (+,–)", {
                 max: 100,
                 addition: true,
                 subtraction: true,
-                withTenTransition: true,
-                withTenTransitionEasy: true
+                difficulty: AdditionAndSubtractionGameDifficulty.MEDIUM,
             }, renderStars(2, "mittel"), COLOR_MEDIUM))
             output.push(renderGameType("Mix (+,–)", {
                 max: 100,
                 addition: true,
                 subtraction: true,
-                withTenTransition: true,
-                withTenTransitionEasy: false
+                difficulty: AdditionAndSubtractionGameDifficulty.HARD,
             }, renderStars(3, "schwer"), COLOR_HARD))
         }
         return output;

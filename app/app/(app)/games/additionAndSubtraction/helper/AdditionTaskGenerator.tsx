@@ -4,7 +4,7 @@ import {TaskWithSolutionType} from "@/components/TaskTemplate";
 
 export class AdditionTaskGenerator {
 
-    static generateWithoutTenTransition(maxNumber: any): TaskWithSolutionType {
+    static generateEasy(maxNumber: any): TaskWithSolutionType {
         let baseTask = AdditionBaseTaskGenerator.generateWithoutTenTransition(maxNumber);
         let taskWithSolution = {
             task: baseTask.higherNumber + " + " + baseTask.lowerNumber,
@@ -14,7 +14,18 @@ export class AdditionTaskGenerator {
         return taskWithSolution;
     }
 
-    static generateWithTenTransition(maxNumber: any): TaskWithSolutionType {
+    static generateMedium(maxNumber: any): TaskWithSolutionType {
+        let baseTask = AdditionBaseTaskGenerator.generateWithTenTransitionSingleNumber(maxNumber);
+
+        let taskWithSolution = {
+            task: baseTask.higherNumber + " + " + baseTask.lowerNumber,
+            solution: baseTask.solution
+        }
+
+        return taskWithSolution;
+    }
+
+    static generateHard(maxNumber: any): TaskWithSolutionType {
         let baseTask = AdditionBaseTaskGenerator.generateWithTenTransition(maxNumber);
 
         let taskWithSolution = {
@@ -25,14 +36,4 @@ export class AdditionTaskGenerator {
         return taskWithSolution;
     }
 
-    static generateWithTenTransitionSingleNumber(maxNumber: any): TaskWithSolutionType {
-        let baseTask = AdditionBaseTaskGenerator.generateWithTenTransitionSingleNumber(maxNumber);
-
-        let taskWithSolution = {
-            task: baseTask.higherNumber + " + " + baseTask.lowerNumber,
-            solution: baseTask.solution
-        }
-
-        return taskWithSolution;
-    }
 }

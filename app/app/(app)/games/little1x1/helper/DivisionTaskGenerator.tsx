@@ -9,7 +9,7 @@ export class DivisionTaskGenerator {
     static generateCoreTask() {
         let taskWithSolution = {
             task: "",
-            solution: 0
+            solution: 0,
         }
 
         let coreRows = [1,2,5,10];

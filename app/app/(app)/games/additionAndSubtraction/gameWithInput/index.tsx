@@ -1,9 +1,12 @@
 import React from "react";
 import {AdditionTaskGenerator} from "./../helper/AdditionTaskGenerator";
-import {Text, View} from "@/components/Themed";
+import {View} from "@/components/Themed";
 import {TaskTemplate} from "@/components/TaskTemplate";
 import {Href, useGlobalSearchParams} from "expo-router";
-import {AdditionAndSubtractionGameProps} from "@/app/(app)/games/additionAndSubtraction";
+import {
+    AdditionAndSubtractionGameDifficulty,
+    AdditionAndSubtractionGameProps
+} from "@/app/(app)/games/additionAndSubtraction";
 import {SubtractionTaskGenerator} from "@/app/(app)/games/additionAndSubtraction/helper/SubtractionTaskGenerator";
 
 
@@ -11,9 +14,11 @@ export function getRouteToAdditionAndSubtractionWithInput(params: AdditionAndSub
     let paramsEncoded = "";
     let keys = Object.keys(params);
     for(let key of keys){
+        // @ts-ignore
         let value = params?.[key];
         paramsEncoded += ""+encodeURIComponent(key)+"="+encodeURIComponent(value)+"&"
     }
+    // @ts-ignore
     return "(app)/games/additionAndSubtraction/gameWithInput"+"?"+paramsEncoded
 }
 
@@ -36,55 +41,42 @@ export default function TabOneScreen() {
         const maxNumber = params.max
         const isAddition = params.addition === "true"
         const isSubtraction = params.subtraction === "true"
-        const isWithTenTransition = params.withTenTransition === "true"
-        const isWithTenTransitionEasy = params.withTenTransitionEasy === "true"
+        const difficulty = params.difficulty;
 
         if(isAddition && !isSubtraction){
-            if(isWithTenTransition){
-                if(isWithTenTransitionEasy){
-                    return AdditionTaskGenerator.generateWithTenTransitionSingleNumber(maxNumber);
-                } else {
-                    return AdditionTaskGenerator.generateWithTenTransition(maxNumber);
-                }
-            } else {
-                return AdditionTaskGenerator.generateWithoutTenTransition(maxNumber);
+            switch (difficulty) {
+                case AdditionAndSubtractionGameDifficulty.EASY: return AdditionTaskGenerator.generateEasy(maxNumber);
+                case AdditionAndSubtractionGameDifficulty.MEDIUM: return AdditionTaskGenerator.generateMedium(maxNumber);
+                case AdditionAndSubtractionGameDifficulty.HARD: return AdditionTaskGenerator.generateHard(maxNumber);
             }
         }
         if(!isAddition && isSubtraction){
-            if(isWithTenTransition){
-                if(isWithTenTransitionEasy){
-                    return SubtractionTaskGenerator.generateWithTenTransitionSingleNumber(maxNumber);
-                } else {
-                    return SubtractionTaskGenerator.generateWithTenTransition(maxNumber);
-                }
-            } else {
-                return SubtractionTaskGenerator.generateWithoutTenTransition(maxNumber);
+            switch (difficulty) {
+                case AdditionAndSubtractionGameDifficulty.EASY: return SubtractionTaskGenerator.generateEasy(maxNumber);
+                case AdditionAndSubtractionGameDifficulty.MEDIUM: return SubtractionTaskGenerator.generateMedium(maxNumber);
+                case AdditionAndSubtractionGameDifficulty.HARD: return SubtractionTaskGenerator.generateHard(maxNumber);
             }
         }
         if(isAddition && isSubtraction){
-            if(isWithTenTransition){
-                if(isWithTenTransitionEasy){
-                    let possibleTasks = [
-                        AdditionTaskGenerator.generateWithTenTransitionSingleNumber(maxNumber),
-                        SubtractionTaskGenerator.generateWithTenTransitionSingleNumber(maxNumber)
-                    ];
-                    return possibleTasks[Math.floor(Math.random() * possibleTasks.length)];
-                } else {
-                    let possibleTasks = [
-                        AdditionTaskGenerator.generateWithTenTransition(maxNumber),
-                        SubtractionTaskGenerator.generateWithTenTransition(maxNumber)
-                    ];
-                    return possibleTasks[Math.floor(Math.random() * possibleTasks.length)];
-                }
-            } else {
-                let possibleTasks = [
-                    AdditionTaskGenerator.generateWithoutTenTransition(maxNumber),
-                    SubtractionTaskGenerator.generateWithoutTenTransition(maxNumber)
-                ];
-                return possibleTasks[Math.floor(Math.random() * possibleTasks.length)];
+            let possibleTasks: any[] = [];
+            switch (difficulty) {
+                case AdditionAndSubtractionGameDifficulty.EASY:
+                    possibleTasks.push(AdditionTaskGenerator.generateEasy(maxNumber));
+                    possibleTasks.push(SubtractionTaskGenerator.generateEasy(maxNumber));
+                    break;
+                case AdditionAndSubtractionGameDifficulty.MEDIUM:
+                    possibleTasks.push(AdditionTaskGenerator.generateMedium(maxNumber));
+                    possibleTasks.push(SubtractionTaskGenerator.generateMedium(maxNumber));
+                    break;
+                case AdditionAndSubtractionGameDifficulty.HARD:
+                    possibleTasks.push(AdditionTaskGenerator.generateHard(maxNumber));
+                    possibleTasks.push(SubtractionTaskGenerator.generateHard(maxNumber));
+                    break;
             }
+
+            return possibleTasks[Math.floor(Math.random() * possibleTasks.length)];
         }
-        return AdditionTaskGenerator.generateWithoutTenTransition(maxNumber);
+        return AdditionTaskGenerator.generateEasy(maxNumber);
     }
 
     return (
