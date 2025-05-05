@@ -40,7 +40,7 @@ export default function TabOneScreen() {
                     firstNumberAllowedMultipleOfTen: true,
                     secondNumberNumberMin: 1,
                     secondNumberNumberMax: 9,
-                    secondNumberAllowedMultipleOfTen: true,
+                    secondNumberAllowedMultipleOfTen: false,
                     solutionMinInclusive: 1,
                     solutionMaxInclusive: 100,
                     solutionAllowedMultipleOfTen: false,
