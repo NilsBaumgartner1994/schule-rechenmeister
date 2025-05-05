@@ -47,7 +47,7 @@ export default function TabOneScreen() {
                     includeTasksWithCarryOver: false,
                     includeTasksWithoutCarryOver: true,
                 }
-            }, renderStars(1, "Einfach\n(zweistellige Zahl und einstellige Zahl; ohne Zehnerübergang)"), COLOR_EASY))
+            }, renderStars(1, "Einfach"), COLOR_EASY))
 
             output.push(renderGameTypeCard(name, {
                 addition: addition,
@@ -65,7 +65,7 @@ export default function TabOneScreen() {
                     includeTasksWithCarryOver: false,
                     includeTasksWithoutCarryOver: true,
                 }
-            }, renderStars(3, "Schwer\n(zweistellige Zahl und zweistellige Zahl; ohne Zehnerübergang)"), COLOR_HARD))
+            }, renderStars(3, "Schwer"), COLOR_HARD))
         }
 
         return output;

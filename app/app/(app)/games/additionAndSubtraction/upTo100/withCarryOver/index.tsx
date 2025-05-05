@@ -43,11 +43,11 @@ export default function TabOneScreen() {
                     secondNumberAllowedMultipleOfTen: true,
                     solutionMinInclusive: 1,
                     solutionMaxInclusive: 100,
-                    solutionAllowedMultipleOfTen: true,
+                    solutionAllowedMultipleOfTen: false,
                     includeTasksWithCarryOver: true,
                     includeTasksWithoutCarryOver: false,
                 }
-            }, renderStars(1, "Einfach\n(zweistellige Zahl und einstellige Zahl; mit Zehnerübergang)"), COLOR_EASY))
+            }, renderStars(1, "Einfach"), COLOR_EASY))
             output.push(renderGameTypeCard(name, {
                 addition: addition,
                 subtraction: subtraction,
@@ -60,11 +60,11 @@ export default function TabOneScreen() {
                     secondNumberAllowedMultipleOfTen: false,
                     solutionMinInclusive: 1,
                     solutionMaxInclusive: 100,
-                    solutionAllowedMultipleOfTen: true,
+                    solutionAllowedMultipleOfTen: false,
                     includeTasksWithCarryOver: true,
                     includeTasksWithoutCarryOver: false,
                 }
-            }, renderStars(1, "Schwer\n(zweistellige Zahl und zweistellige Zahl; mit Zehnerübergang"), COLOR_HARD))
+            }, renderStars(3, "Schwer"), COLOR_HARD))
         }
         return output;
     }
