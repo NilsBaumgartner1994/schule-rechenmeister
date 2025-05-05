@@ -70,6 +70,38 @@ export default function TabLayout() {
               showBackButton: true
           })}
           {useRenderMyDrawerScreen({
+              routeName: 'games/additionAndSubtraction/upTo20/index',
+              label: "Addition und Subtraktion bis 20",
+            title: "Addition und Subtraktion bis 20",
+              icon: 'gamepad',
+              visibleInDrawer: false,
+              showBackButton: true
+          })}
+          {useRenderMyDrawerScreen({
+              routeName: 'games/additionAndSubtraction/upTo100/index',
+              label: "Addition und Subtraktion bis 100",
+              title: "Addition und Subtraktion bis 100",
+              icon: 'gamepad',
+              visibleInDrawer: false,
+              showBackButton: true
+          })}
+          {useRenderMyDrawerScreen({
+              routeName: 'games/additionAndSubtraction/upTo100/withCarryOver/index',
+              label: "Addition und Subtraktion bis 100 mit Zehnerübergang",
+              title: "Addition und Subtraktion bis 100 mit Zehnerübergang",
+              icon: 'gamepad',
+              visibleInDrawer: false,
+              showBackButton: true
+          })}
+          {useRenderMyDrawerScreen({
+              routeName: 'games/additionAndSubtraction/upTo100/withoutCarryOver/index',
+              label: "Addition und Subtraktion bis 100 ohne Zehnerübergang",
+              title: "Addition und Subtraktion bis 100 ohne Zehnerübergang",
+              icon: 'gamepad',
+              visibleInDrawer: false,
+              showBackButton: true
+          })}
+          {useRenderMyDrawerScreen({
               routeName: 'games/additionAndSubtraction/index',
               label: "Addition und Subtraktion",
               title: "Addition und Subtraktion",

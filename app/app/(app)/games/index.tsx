@@ -5,8 +5,9 @@ import {ListRenderItemInfo} from "react-native";
 import {BreakPoint, useBreakPointValue} from "@/helper/device/DeviceHelper";
 import {router} from "expo-router";
 import {MyButton} from "@/components/buttons/MyButton";
-import {getRouteToAdditionAndSubtractionIndex} from "@/app/(app)/games/additionAndSubtraction";
 import {getRouteToMultiplicationAndDivisionIndex} from "@/app/(app)/games/little1x1";
+import {getRouteToAdditionAndSubtractionUpTo20} from "@/app/(app)/games/additionAndSubtraction/upTo20";
+import {getRouteToAdditionAndSubtractionUpTo100} from "@/app/(app)/games/additionAndSubtraction/upTo100";
 
 export function nacigateToGames(){
     router.push("/(app)/games");
@@ -28,11 +29,11 @@ export default function TabOneScreen() {
 
     data.push({key: "1", data: {
             title: "Rechnen bis 20",
-        route: getRouteToAdditionAndSubtractionIndex(20),
+        route: getRouteToAdditionAndSubtractionUpTo20(),
     }})
     data.push({key: "2", data: {
             title: "Rechnen bis 100",
-        route: getRouteToAdditionAndSubtractionIndex(100),
+        route: getRouteToAdditionAndSubtractionUpTo100(),
 
     }})
     data.push({key: "3", data: {
