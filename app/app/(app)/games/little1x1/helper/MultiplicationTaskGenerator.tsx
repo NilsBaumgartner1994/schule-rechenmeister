@@ -30,8 +30,8 @@ export class MultiplicationTaskGenerator {
             solution: 0
         }
 
-        let firstNumber = this.generateNumberFromTo(2, 10); // no multiplication by 1
-        let secondNumber = this.generateNumberFromTo(2, 10); // no multiplication by 1
+        let firstNumber = this.generateNumberFromTo(2, 9); // no multiplication by 1 or by 10
+        let secondNumber = this.generateNumberFromTo(2, 9); // no multiplication by 1 or by 10
         let solution = firstNumber * secondNumber;
 
         taskWithSolution.task = firstNumber + " ⋅ " + secondNumber;

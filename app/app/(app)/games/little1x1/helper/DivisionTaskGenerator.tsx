@@ -30,8 +30,8 @@ export class DivisionTaskGenerator {
             solution: 0
         }
 
-        let firstNumber = this.generateNumberFromTo(2, 10); // no base with value 1
-        let secondNumber = this.generateNumberFromTo(2, 10); // no division by 1
+        let firstNumber = this.generateNumberFromTo(2, 9); // no base with value 1 or 10
+        let secondNumber = this.generateNumberFromTo(2, 9); // no division by 1 or by 10
         let solution = firstNumber * secondNumber;
 
         taskWithSolution.task = solution + " : " + firstNumber;
