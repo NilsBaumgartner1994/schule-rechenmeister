@@ -2,7 +2,7 @@ import React, {FunctionComponent, useEffect, useState} from "react";
 import {
     getFontSizeInPixelBySize,
     Text, TEXT_SIZE_2_EXTRA_LARGE,
-    TEXT_SIZE_4_EXTRA_LARGE,
+    TEXT_SIZE_4_EXTRA_LARGE, TEXT_SIZE_5_EXTRA_LARGE,
     TEXT_SIZE_6_EXTRA_LARGE,
     View
 } from "@/components/Themed";
@@ -89,7 +89,7 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
                 <View style={{width: "100%", alignItems: "center", justifyContent: "center", flexDirection: "row"}}>
                     <Text style={{
                         color: textColor,
-                    }} size={TEXT_SIZE_6_EXTRA_LARGE} bold={true}>{task+" = "}</Text>
+                    }} size={TEXT_SIZE_5_EXTRA_LARGE} bold={true}>{task+" = "}</Text>
                     <View style={{paddingLeft: 10, width: "20%", paddingVertical: 10}}>
                         <MyButton textSize={TEXT_SIZE_4_EXTRA_LARGE} text={input || " "} />
                     </View>
@@ -119,7 +119,7 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
             )
         }
 
-        return <GridList paddingVertical={5} paddingHorizontal={5} amountColumns={4}>
+        return <GridList paddingVertical={5} paddingHorizontal={5} amountColumns={2}>
             {output}
         </GridList>
     }
@@ -172,7 +172,7 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
         let inputFields = [];
         for(let i=0; i<=9; i++){
             inputFields.push(
-                <MyButton textSize={TEXT_SIZE_6_EXTRA_LARGE} text={i+""} onPress={() => {
+                <MyButton centerItems={true} textSize={TEXT_SIZE_6_EXTRA_LARGE} text={i+""} onPress={() => {
                     let nextInput = input + "" + i;
                     let asNumber = parseInt(nextInput);
                     setInput(""+asNumber);
@@ -218,12 +218,12 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
 
         return(
             <View style={{width: "100%"}}>
-                <GridList paddingVertical={10} amountColumns={1}>
-                    <MyButton isActive={true} backgroundColor={COLOR_CORRECT} iconSize={getFontSizeInPixelBySize(TEXT_SIZE_4_EXTRA_LARGE)} textSize={TEXT_SIZE_4_EXTRA_LARGE} icon={"check"} style={{borderColor: "green", borderWidth: 3}} onPress={() => {
-                        handleConfirm();
-                    }} />
+                <GridList paddingHorizontal={10} amountColumns={2}>
                     <MyButton isActive={true} backgroundColor={COLOR_WRONG} iconSize={getFontSizeInPixelBySize(TEXT_SIZE_4_EXTRA_LARGE)} textSize={TEXT_SIZE_4_EXTRA_LARGE} icon={"trash-can"} style={{borderColor: "red", borderWidth: 3}} onPress={() => {
                         setInput("");
+                    }} />
+                    <MyButton isActive={true} backgroundColor={COLOR_CORRECT} iconSize={getFontSizeInPixelBySize(TEXT_SIZE_4_EXTRA_LARGE)} textSize={TEXT_SIZE_4_EXTRA_LARGE} icon={"check"} style={{borderColor: "green", borderWidth: 3}} onPress={() => {
+                        handleConfirm();
                     }} />
                 </GridList>
             </View>
@@ -233,12 +233,13 @@ export const TaskTemplatePlayers: FunctionComponent<TaskTemplateProps> = (props)
     function renderInputRow(){
 
         return (
-            <View style={{width: "100%", flexDirection: "row"}}>
-                <View style={{width: "70%"}}>
+            <View style={{width: "100%"}}>
+                <View style={{width: "100%"}}>
                     {renderUserInputFields()}
                 </View>
-                <View style={{width: "10%"}} />
-                <View style={{width: "20%"}}>
+                <View style={{width: "100%", height: 10}}>
+                </View>
+                <View style={{width: "100%"}}>
                     {renderConfirmAndReset()}
                 </View>
             </View>

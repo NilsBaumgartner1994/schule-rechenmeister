@@ -56,7 +56,8 @@ export default function TabOneScreen() {
                     backgroundColor: color
                 }}>
                     <Heading style={{
-                        color: colorContrast
+                        color: colorContrast,
+                        textAlign: "center",
                     }}>{name}</Heading>
                 </View>
                 {description}
@@ -186,7 +187,7 @@ export default function TabOneScreen() {
         <MyScrollView>
             <View style={{width: "100%", alignItems: "center"}}><Heading>{"Wähle dein Spiel"}</Heading></View>
             <View style={{width: "100%", alignItems: "center"}}><Heading>{"Rechnen bis "+max}</Heading></View>
-            <GridList paddingVertical={20} paddingHorizontal={20} amountColumns={amountColumns}>
+            <GridList paddingVertical={7} paddingHorizontal={5} amountColumns={amountColumns}>
                 {renderTasks()}
             </GridList>
         </MyScrollView>

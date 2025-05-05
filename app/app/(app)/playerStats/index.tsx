@@ -59,6 +59,22 @@ export default function TabOneScreen() {
         return output;
     }
 
+    function renderButtonBackHome(){
+        return(
+            <View style={{
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+            }}>
+                <View>
+                    <MyButton paddingHorizontal={50} isActive={true} accessibilityLabel={"zur Startseite"} useOnlyNecessarySpace={true} text={"zur Startseite"} leftIcon={"home"} onPress={() => {
+                        navigateToHome();
+                    }} />
+                </View>
+            </View>
+        )
+    }
+
     return (
         <View style={{width: "100%", height: "100%", padding: 20}}>
             <ScrollView style={{
@@ -77,20 +93,11 @@ export default function TabOneScreen() {
                         <Heading bold={true}>{"Punkte"}</Heading>
                     </View>
                 </View>
+                {renderButtonBackHome()}
                 <View style={{width: "100%", height: "20px"}} />
                 {renderPlayers()}
                 <View style={{width: "100%", height: "20px"}} />
-                <View style={{
-                    width: "100%",
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}>
-                    <View>
-                        <MyButton paddingHorizontal={50} isActive={true} accessibilityLabel={"zur Startseite"} useOnlyNecessarySpace={true} text={"zur Startseite"} leftIcon={"home"} onPress={() => {
-                            navigateToHome();
-                        }} />
-                    </View>
-                </View>
+                {renderButtonBackHome()}
             </ScrollView>
         </View>
     );

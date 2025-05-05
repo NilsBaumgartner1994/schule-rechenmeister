@@ -30,7 +30,7 @@ export default function TabOneScreen() {
                 width: "100%",
                 alignItems: "center"
             }}>
-                <MyButton paddingHorizontal={200} isActive={true} iconSize={getFontSizeInPixelBySize(TEXT_SIZE_4_EXTRA_LARGE)} textSize={TEXT_SIZE_4_EXTRA_LARGE} text={"Start"} onPress={() => {
+                <MyButton paddingHorizontal={100} isActive={true} iconSize={getFontSizeInPixelBySize(TEXT_SIZE_4_EXTRA_LARGE)} textSize={TEXT_SIZE_4_EXTRA_LARGE} text={"Start"} onPress={() => {
                     navigateToGameModeSelection();
                 }} />
             </View>

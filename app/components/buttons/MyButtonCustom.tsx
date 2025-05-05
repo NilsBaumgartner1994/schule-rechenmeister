@@ -25,7 +25,6 @@ export const MyButtonCustomContentPadder = ({children}: ViewProps) => {
 			flexDirection: 'row', flexWrap: 'wrap',
 			justifyContent: 'center',
 			width: "100%",
-			paddingRight: BUTTON_DEFAULT_Padding,
 		}}
 		>
 			{children}
@@ -150,6 +149,7 @@ export const MyButtonCustom = ({centerItems, customIcon, icon, isActive, borderB
 					style={{
 					flexShrink: 1,
 					color: usedTextColor,
+					textAlign: centerItems ? 'center' : 'left',
 				}}
 				>{text}
 				</Text>
