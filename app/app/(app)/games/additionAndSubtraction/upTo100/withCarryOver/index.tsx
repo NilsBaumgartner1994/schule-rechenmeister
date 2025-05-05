@@ -15,7 +15,7 @@ export default function TabOneScreen() {
     const COLOR_MEDIUM = "#fff2cc";
     const COLOR_HARD = "#f4cccc";
 
-    const amountColumns = 3
+    const amountColumns = 2
 
     function renderStars(amount: number, difficulty: string){
         return <GameTypeCardStars numberStars={amount} description={difficulty} />
@@ -47,14 +47,7 @@ export default function TabOneScreen() {
                     includeTasksWithCarryOver: true,
                     includeTasksWithoutCarryOver: false,
                 }
-            }, renderStars(1, "(einfach, rechts; zweistellige Zahl + einstellige Zahl; mit Zehnerübergang)"), COLOR_EASY))
-        }
-
-        for (let i = 0; i < names.length; i++){
-            let name = names[i];
-            let addition = name.includes("+")
-            let subtraction = name.includes("–")
-
+            }, renderStars(1, "Einfach\n(zweistellige Zahl und einstellige Zahl; mit Zehnerübergang)"), COLOR_EASY))
             output.push(renderGameTypeCard(name, {
                 addition: addition,
                 subtraction: subtraction,
@@ -71,9 +64,8 @@ export default function TabOneScreen() {
                     includeTasksWithCarryOver: true,
                     includeTasksWithoutCarryOver: false,
                 }
-            }, renderStars(1, "(schwer, rechts; zweistellige Zahl + zweistellige Zahl; mit Zehnerübergang"), COLOR_HARD))
+            }, renderStars(1, "Schwer\n(zweistellige Zahl und zweistellige Zahl; mit Zehnerübergang"), COLOR_HARD))
         }
-
         return output;
     }
 

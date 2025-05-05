@@ -9,7 +9,9 @@ export const GameTypeCardStars = ({numberStars, description}: {numberStars: numb
 
     return (
         <View style={{alignItems: "center", justifyContent: "center"}}>
-            <Heading>{description}</Heading>
+            <Heading style={{
+                textAlign: "center"
+            }}>{description}</Heading>
             <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
                 {stars}
             </View>
