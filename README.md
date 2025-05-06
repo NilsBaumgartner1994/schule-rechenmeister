@@ -21,16 +21,16 @@ Die App bietet folgende Funktionen:
 - Einzelspieler
     - Der oder die Schüler:in spielt alleine und kann sich selbst herausfordern.
 - Mehrspieler (lokal nacheinander)
-    - Der oder die Schüler:in spielen abwechselnd und können sich gegenseitig herausfordern. Es kann am Ende eine Punkteüberischt angezeigt werden.
+    - Die Schüler:innen spielen abwechselnd und können sich gegenseitig herausfordern. Es kann am Ende eine Punkteüberischt angezeigt werden.
 - Flashcards
-  - Geeignet für die ganze Klasse. Die Lehrkraft kann die Aufgaben auf dem Beamer anzeigen. Die Lösung wird durch Klicken auf die Karte angezeigt.
+  - Geeignet für die ganze Klasse. Die Lehrkraft kann die Aufgaben auf dem Beamer anzeigen oder die Schüler:innen können sich abfragen. Die Lösung wird durch Klicken auf die Karte angezeigt.
 
 ### Aufgaben
 
 - Addition
   - Rechnen bis 20
     - ohne Zehnerübergang
-    - mit einfachem Zehnerübergang
+    - mit Zehnerübergang
   - Rechnen bis 100
     - ohne Zehnerübergang
     - mit einfachem Zehnerübergang
