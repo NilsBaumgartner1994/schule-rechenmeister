@@ -10,7 +10,7 @@
 
 ## Beschreibung
 
-Eine einfache App (Web, Android, iOS) zum Rechnen mit Zahlen. Schüler können lokal gegeneinander oder alleine spielen. Die App ist für Schüler der 1. bis 4. Klasse geeignet.
+Eine einfache App (Web, Android, iOS) zum Rechnen mit Zahlen. Schüler:innen können lokal gegeneinander oder alleine spielen. Die App ist für Schüler der 1. bis 4. Klasse geeignet.
 
 ## Funktionen
 
