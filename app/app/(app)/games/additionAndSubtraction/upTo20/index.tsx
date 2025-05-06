@@ -42,7 +42,7 @@ export default function TabOneScreen() {
                 includeTasksWithCarryOver: false,
                 includeTasksWithoutCarryOver: true,
             }
-        }, renderStars(1, "einfach"), COLOR_EASY))
+        }, renderStars(1, "Einfach"), COLOR_EASY))
         output.push(renderGameTypeCard("Addition (+)", {
             addition: true,
             subtraction: false,
@@ -59,7 +59,7 @@ export default function TabOneScreen() {
                 includeTasksWithCarryOver: true,
                 includeTasksWithoutCarryOver: false,
             }
-        }, renderStars(2, "schwer"), COLOR_HARD))
+        }, renderStars(2, "Schwer"), COLOR_HARD))
         output.push(renderGameTypeCard("Subtraktion (–)", {
             addition: false,
             subtraction: true,
@@ -76,7 +76,7 @@ export default function TabOneScreen() {
                 includeTasksWithCarryOver: false,
                 includeTasksWithoutCarryOver: true,
             }
-        }, renderStars(1, "einfach"), COLOR_EASY))
+        }, renderStars(1, "Einfach"), COLOR_EASY))
         output.push(renderGameTypeCard("Subtraktion (–)", {
             addition: false,
             subtraction: true,
@@ -93,7 +93,7 @@ export default function TabOneScreen() {
                 includeTasksWithCarryOver: true,
                 includeTasksWithoutCarryOver: false,
             }
-        }, renderStars(2, "schwer"), COLOR_HARD))
+        }, renderStars(2, "Schwer"), COLOR_HARD))
         output.push(renderGameTypeCard("Mix (+,–)", {
             addition: true,
             subtraction: true,
@@ -110,7 +110,7 @@ export default function TabOneScreen() {
                 includeTasksWithCarryOver: false,
                 includeTasksWithoutCarryOver: true,
             }
-        }, renderStars(1, "einfach"), COLOR_EASY))
+        }, renderStars(1, "Einfach"), COLOR_EASY))
         output.push(renderGameTypeCard("Mix (+,–)", {
             addition: true,
             subtraction: true,
@@ -127,7 +127,7 @@ export default function TabOneScreen() {
                 includeTasksWithCarryOver: true,
                 includeTasksWithoutCarryOver: false,
             }
-        }, renderStars(2, "schwer"), COLOR_HARD))
+        }, renderStars(2, "Schwer"), COLOR_HARD))
 
         return output;
     }

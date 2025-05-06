@@ -6,6 +6,8 @@ import {GridList} from "@/components/GridList";
 import {useMyContrastColor} from "@/helper/color/MyContrastColor";
 import {router} from "expo-router";
 import {getRouteToMultiplicationAndDivisionWithInput} from "@/app/(app)/games/little1x1/gameWithInput";
+import {GameTypeCard} from "@/components/card/GameTypeCard";
+import {GameTypeCardStars} from "@/components/card/GameTypeCardStars";
 
 
 export type MultiplicationAndDivisionGameProps = {
@@ -27,83 +29,55 @@ export default function TabOneScreen() {
     const viewBackgroundColor = useViewBackgroundColor();
     const viewContrastColor = useMyContrastColor(viewBackgroundColor);
 
-    function renderGameType(name: string, description: string, gameType: MultiplicationAndDivisionGameProps, level: JSX.Element, color: string){
+    function renderStars(amount: number, difficulty: string){
+        return <GameTypeCardStars numberStars={amount} description={difficulty} />
+    }
+
+    function renderGameType(name: string,gameType: MultiplicationAndDivisionGameProps,  description: JSX.Element, color: string){
         const colorContrast = useMyContrastColor(color);
+        const onPress = () => {
+            router.push(getRouteToMultiplicationAndDivisionWithInput(gameType));
+        }
 
         return (
-            <MyTouchableOpacity accessibilityLabel={name} style={{borderColor: viewContrastColor, borderWidth: 1, borderRadius: 5, overflow: "hidden"}} onPress={() => {
-                router.push(getRouteToMultiplicationAndDivisionWithInput(gameType));
-            }}>
-                <View style={{
-                    width: "100%",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: "20px",
-                    backgroundColor: color
-                }}>
-                    <Heading style={{
-                        color: colorContrast
-                    }}>{name}</Heading>
-                    <Heading style={{
-                        color: colorContrast
-                    }}>{description}</Heading>
-                </View>
-                {level}
-            </MyTouchableOpacity>
+            <GameTypeCard name={name} description={description} color={color} onPress={onPress} />
         );
     }
 
     const amountColumns = 2;
 
-    function renderStars(amount: number, difficulty: string){
-
-        let stars = [];
-        for(let i = 0; i < amount; i++){
-            stars.push(<Icon name="star" color="#FFD700" />);
-        }
-
-        return (
-            <View style={{alignItems: "center", justifyContent: "center"}}>
-                <Heading>{difficulty}</Heading>
-                <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
-                    {stars}
-                </View>
-            </View>
-        );
-    }
-
     function renderTasks(){
         let output = [];
-        output.push(renderGameType("Multiplikation (⋅)", "Kernaufgaben", {
+        output.push(renderGameType("Multiplikation (⋅)", {
             coretasks: true,
             multiplication: true,
             division: false
-        }, renderStars(1, ""), COLOR_EASY))
-        output.push(renderGameType("Multiplikation (⋅)", "Alle Aufgaben", {
+        }, renderStars(1, "Kernaufgaben"), COLOR_EASY))
+        output.push(renderGameType("Multiplikation (⋅)", {
             coretasks: false,
             multiplication: true,
             division: false
-        }, renderStars(2, ""), COLOR_HARD))
-        output.push(renderGameType("Division ( : )", "Kernaufgaben", {
+        }, renderStars(2, "Alle Aufgaben"), COLOR_HARD))
+        output.push(renderGameType("Division ( : )", {
             coretasks: true,
             multiplication: false,
             division: true
-        }, renderStars(1, ""), COLOR_EASY))
-        output.push(renderGameType("Division ( : )", "Alle Aufgaben", {
+        }, renderStars(1, "Kernaufgaben"), COLOR_EASY))
+        output.push(renderGameType("Division ( : )", {
             coretasks: false,
             multiplication: false,
             division: true
-        }, renderStars(2, ""), COLOR_HARD))
-        output.push(renderGameType("Mix (⋅, : )", "Kernaufgaben", {
+        }, renderStars(2, "Alle Aufgaben"), COLOR_HARD))
+        output.push(renderGameType("Mix (⋅, : )", {
             coretasks: true,
             multiplication: true,
             division: true
-        }, renderStars(1, ""), COLOR_EASY))
-        output.push(renderGameType("Mix (⋅, : )", "Alle Aufgaben", {
+        }, renderStars(1, "Kernaufgaben"), COLOR_EASY))
+        output.push(renderGameType("Mix (⋅, : )", {
             coretasks: false,
             multiplication: true,
             division: true
-        }, renderStars(2, ""), COLOR_HARD))
+        }, renderStars(2, "Alle Aufgaben"), COLOR_HARD))
         return output;
     }
 

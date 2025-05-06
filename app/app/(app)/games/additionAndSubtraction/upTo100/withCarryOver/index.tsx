@@ -64,7 +64,7 @@ export default function TabOneScreen() {
                     includeTasksWithCarryOver: true,
                     includeTasksWithoutCarryOver: false,
                 }
-            }, renderStars(3, "Schwer"), COLOR_HARD))
+            }, renderStars(2, "Schwer"), COLOR_HARD))
         }
         return output;
     }
