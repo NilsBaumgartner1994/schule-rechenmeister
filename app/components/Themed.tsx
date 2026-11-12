@@ -109,6 +109,10 @@ export function Icon({name, size, family, ...props}: IconProps) {
   return <Text>{content}</Text>
 }
 
+// Grundschulschrift: ABeeZee (freie Web-Version von ABeZeh). Ist ABeZeh auf dem Geraet installiert (Web), wird diese bevorzugt.
+export const SCHOOL_FONT = 'ABeeZee';
+const SCHOOL_FONT_FAMILY = PlatformHelper.isWeb() ? "'ABeZeh', 'ABeeZee', sans-serif" : SCHOOL_FONT;
+
 export const TEXT_SIZE_DEFAULT = 'md';
 export const TEXT_SIZE_SMALL = "sm";
 export const TEXT_SIZE_EXTRA_SMALL = "xs";
@@ -214,7 +218,8 @@ export function TextInput(props: TextInputProps) {
             ref={props.myRef}
             {...defaultInputFieldProps}
             style={{
-              fontSize: usedFontSize
+              fontSize: usedFontSize,
+              fontFamily: SCHOOL_FONT_FAMILY,
             }}
         />
       </DefaultInput>
@@ -274,7 +279,8 @@ export function TestAreaInput(props: TextInputProps) {
             ref={props.myRef}
             {...defaultInputFieldProps}
             style={{
-              fontSize: usedFontSize
+              fontSize: usedFontSize,
+              fontFamily: SCHOOL_FONT_FAMILY,
             }}
         />
       </DefaultTextarea>
@@ -297,7 +303,7 @@ export function useTextContrastColor() {
 export function Heading({style,...props}: TextProps) {
   const textContrastColor = useTextContrastColor();
   // @ts-ignore
-  const mergedStyle = {color: textContrastColor}
+  const mergedStyle = {color: textContrastColor, fontFamily: SCHOOL_FONT_FAMILY}
 
   // @ts-ignore
   return <DefaultHeading accessibilityRole={MyAccessibilityRoles.Header} selectable={true} style={[mergedStyle, style]} {...props} />;
@@ -321,7 +327,8 @@ export function Text({style, size,...props}: MyTextProps) {
 
   // @ts-ignore
   const defaultStyle = {
-    color: textContrastColor
+    color: textContrastColor,
+    fontFamily: SCHOOL_FONT_FAMILY,
   }
 
   if (isWeb) { // only for web since on mobile the text will break automatically

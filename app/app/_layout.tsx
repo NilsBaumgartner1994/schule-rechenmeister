@@ -17,6 +17,20 @@ import RootTextAndIconDimensions from "@/components/RootTextAndIconDimensions";
 import {RootThemeProvider} from "@/components/rootLayout/RootThemeProvider";
 import Slot = Navigator.Slot;
 import {GluestackUIProvider} from "@gluestack-ui/themed";
+import {SCHOOL_FONT} from "@/components/Themed";
+
+// Grundschulschrift fuer die ganze App: ABeeZee (freie Web-Version von ABeZeh)
+const schoolConfig = {
+  ...config,
+  tokens: {
+    ...config.tokens,
+    fonts: {
+      ...config.tokens.fonts,
+      heading: SCHOOL_FONT,
+      body: SCHOOL_FONT,
+    },
+  },
+};
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -54,6 +68,8 @@ export default function RootLayout() {
 
   const [fontsLoaded, fontsError] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    ABeeZee: require('../assets/fonts/ABeeZee-Regular.ttf'),
+    'ABeeZee-Italic': require('../assets/fonts/ABeeZee-Italic.ttf'),
     ...FontAwesome.font,
   });
 
@@ -112,7 +128,7 @@ export default function RootLayout() {
           style={{ flex: 1, zIndex: 999 }}
       >
         <StoreProvider store={store} key={reloadNumber+""}>
-          <GluestackUIProvider config={config} key={reloadNumber+""}>
+          <GluestackUIProvider config={schoolConfig} key={reloadNumber+""}>
             <RootTextAndIconDimensions />
             <RootThemeProvider key={reloadNumber+""}>
               <View style={{visibility: "hidden",
